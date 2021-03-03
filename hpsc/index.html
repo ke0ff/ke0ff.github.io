@@ -1,0 +1,398 @@
+
+<!-- saved from url=(0039)http://www.rollanet.org/~joeh/projects/ -->
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word 11">
+<meta name="Originator" content="Microsoft Word 11">
+<link rel="File-List" href="./index_files/filelist.xml">
+<link rel="Edit-Time-Data" href="./index_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title align="CENTER">The DPS-1200FB Power Supply Controller Page</title>
+<meta name="description" content="Circuit theory, software theory of operation, assembly, and operation of a server PS control interface designed by Joe Haas, KE0FF.">
+<meta name="keywords" content="DPS-1200FB A,438202-002,440785-001,441830-001,HSTNS-PD11 Modifications">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>J</o:Author>
+  <o:LastAuthor>J</o:LastAuthor>
+  <o:Revision>7</o:Revision>
+  <o:TotalTime>5</o:TotalTime>
+  <o:Created>2012-12-20T18:22:00Z</o:Created>
+  <o:LastSaved>2012-12-20T22:32:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>475</o:Words>
+  <o:Characters>2714</o:Characters>
+  <o:Company> DACINT</o:Company>
+  <o:Lines>22</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3183</o:CharactersWithSpaces>
+  <o:Version>11.9999</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h2
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:1021979350;
+	mso-list-template-ids:450297508;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:14.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]--></head><body bgcolor="white" background="../index_files/ffback.JPG" lang="EN-US" link="blue" vlink="blue" style="tab-interval:.5in"><header></header><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="5122"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+
+
+
+
+<div class="Section1">
+
+<div class="MsoNormal" align="center" style="text-align:center">
+
+<hr size="2" width="100%" align="center">
+
+</div>
+
+<div class="MsoNormal" align="center" >
+
+<h2 align="center" style="text-align:center">DPS-1200FB Server Supply Controller Project Page</h2>
+
+<p class="MsoNormal">Updated 11/08/2020 </p>
+<a href="../index.html">(Back to the Projects page...)</a>
+
+<hr size="2" width="100%" align="center">
+
+</div>
+
+<!--<p class="MsoNormal" align="center" style="text-align:center"><img width="483" height="839" id="_x0000_i1026" src="./hm133_banner.jpg"> -->
+<center>
+<table border="0" width="1300">
+<tr>
+<td>
+<img width="571" height="764" id="_x0000_i1026" src="./pscntl_banner.png">
+</td>
+<td>
+<img width="40" height="20" id="_x0000_i1026" src="./space40.png">
+</td>
+<td>
+<center>
+<font size = "6">
+This page describes the DPS-1200FB Control Board Project
+</center>
+<font size = "4"></p>
+
+This project's main goal is to create a small controller board that supports a series connected HP server supply stack while still allowing
+capture of analog data for current and voltage. A small microcontroller is used to capture analog information from the DPS-1200FB A
+supply and provide the data to a host controller via an opto-coupled interface.</p>
+
+The Software link below provides instructions 
+to obtain the source code for this project.  Links to the tools needed to compile and program 
+the <a href="http://www.silabs.com">SiLabs</a> C8051F530 microcontroller used for this project are provided below.</p>
+<font size = "5">
+<a href = "index.html#synopsys">A brief synopsys.</a></p>
+<a href = "index.html#hw">Hardware design</a></p>
+<a href = "index.html#sw">Software design</a></p>
+<a href = "DPS-1200FBA_mods.pdf">DPS-1200 Modifications</a></p>
+</td>
+</tr>
+</table>
+</center>
+
+
+<div class="MsoNormal" align="center" style="text-align:center">
+
+<hr size="2" width="100%" align="center">
+
+</div>
+<center>
+<h2>A Brief Synopsis... <a name = "synopsys"></a></h2>
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+This project was born quite by chance when I happened upon three DPS-1200FB A power supplies at a friend's garage sale - $30 and they were all mine.  Well, OK... it was born a bit later, but this was the trigger.
+I needed to produce a 50V, "BIG-AMP" (e.g., more than 25), DC power supply for a linear amplifier project.  Turns out, these server supplies (and others like them) are rather easy to find and are relatively cheap.
+With some modifications,
+they can be made to produce at least 14V and have an isolated DC ground.  Thusly modified, four such supplies in series can produce 50Vdc at up to 66A (minimum - more if operated at 220Vac input).  Since I
+had three of them, I needed another.  After a brief ponderance, I decided that I needed more - my initial research suggested that repairing these supplies would be a challenge since they use programmable
+microcontrollers, and at least one part for which I can't find any data.
+</p>
+e-bay was happy to pony-up 4 more of the supplies, giving me 3 spares.  Now I could focus on how to control and connect them.  The supplies are controlled by a grounded input (/PSEN) to turn them on.  There
+is also an output pin that produces what "looks" like a current monitor signal (it's behavior deviates below load currents of 3A).  A couple of other signals, status and alarm, also begged to be addressed.
+In truth, only the /PSEN
+signal is needed to operate the supply, but I wanted to be able to monitor the current and voltage.  Since 3 of the 4 supplies were going to have isoladed DC grounds, this posed a problem: for each of those
+supplies, the local ground reference would be at an ever increasing voltage, up to about 39V.  This makes it difficult to handle analog signals.  My solution was to use a small microcontroller with a 12b ADC
+to capture the analog signals. A UART connection back to a central host controller can be easily accomplished using opto-isolators to bridge the gap between local ground and "actual" ground.  Easy-peasy.
+</p>
+This web page details the hardware and software design for this project, and serves as a repository for detailed information relating to its construction and use. 
+</p>
+</td>
+</tr>
+</table>
+<hr size="2" width="100%" align="center">
+
+</div>
+<center>
+<h2>Hardware Design... <a name = "hw"></a></h2>
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+
+The C8051F530 is an MCU I’ve used on several other projects, so it was the clear choice here.  I only needed some timer resources, the UART, and the on-chip ADC.  I located an opto-isolator that could
+accomodate speeds in excess of 400K baud, tho I'll likely run it slower than that.  38.4K is my minimum desired rate.  One of these devices for "TX" and one for "RX" connected so that each side of the UART link
+is wired "multi-drop" style with an open collector on the slave-RX (SRX) and an LED on the slave-TX (STX).  The host drives the RX line with a device that can source 15 or 20 mA with reasonable edges.  The
+Host receives the TX signal and can buffer with a schmitt-trigger style gate.
+</p>
+For the power supply side of the optical barrier, the signals I want to process are: PS Alarm (pin 38, out from the supply), Power supply Present (36), Power supply status (35, out), Imeasure (34, out), and PS
+Enable (33, in).  The documentation for these signals has not been easy to locate.  I've found some folks who have blazed the trail before me, but they didn't appear to be working from an official document
+which described the function of these signals.  Faced with a lack of info, I will simply capture signals, and display their status for now.  As thier functions become more well understood (or verified) I will
+take steps to act on them in realtime.
+</p>
+So, in a nutshell, to make the supply function, one needs to apply a current limited 3.3V to the Present pin (36), and ground PS Enable (33).  This will be accomplished with a UART command.  The output
+voltage and Imeasure values are periodically captured and stored.  The protocol for the dual-multi-drop UART doesn't allow for the slaves to detect collisions when they transmit.  As a result, the protocol
+prohibits unsolicited UART messages from the slaves.  This means that each slave will have to be periodically polled to get their current status.  So, the ADC must continually sample and store results for
+the two analog signals to be monitored: the +12V PS output, and the Imeasure pin from the supply.
+</p>
+The +12V (up to +14V) monitor uses a simple resistive voltage divider to present a signal to the MCU ADC.  The ADC uses an external 2.5V reference, so the divider needs to ensure that the maximum possible
+voltage can be reduced to 2.5V or less.  Something in the range of 15 to 17 Volts is the current target.  For the Imeasure signal, the initial observations are that the slope of the output is about 25mV/ADC
+above 3A.  Below 3A, the slope starts out at around 60mV/A and begins to taper off towards 25mV/A between 2A and 3A.  Worst case this means that Imeasure will be just under 2V for a 70A load.  I have only
+characterized Imeasure between 0A and 20A, as this is the range of my electronic load.  I need to find a way to spot check it out beyond 20A.
+</p>
+Most of the rest of the design has to do with carefully handing the high-current terminations and routing.  2oz copper is one mitigation employed here.  Another is to use a lot of stitching vias with a decent
+size drill hole.  Another debate is whether to fill these via holes with solder, PbSn or Ag laced (4% Ag solder gives a small improvement to conductivity) - I think the interconnect resistance will be low enough, so I
+am reserving this option for later consideration.
+</p>
+I'll construct a rack for the 4 supplies, so they will be mounted close to one another and one of these controller boards will attach to each (the image below illustrates the target layout and interconnects).  The
+host electronics will provide a simple UI via an LCD and possibly a 4x4 keypad (for the moment, I only have a use case for one or two buttons, but may want to have the ability for numeric input if it turns out
+that there are configuration steps required at the host controller level.
+</p>
+
+
+<img width="1200" height="520" id="_x0000_i1026" src="./4up_PSCNTL_sm.png">
+
+</p>
+</td>
+</tr>
+</table>
+<center>
+<a href="PSCNTL_SCH.PDF"><img width="695" height="521" src="./PSCNTL_SCH_THMB.png"></a>
+</p>
+<h3>PSCNTL Schematic and Parts List</h3>
+<h4>(click on image to see a pdf version)</h4>
+</center>
+<hr size="2" width="100%" align="center">
+
+</div>
+<center>
+<h2>Software Design... <a name = "sw"></a></h2>
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+
+The software operates in a single loop which polls for serial data from the host and parses it into actions.  
+It depends heavily on interrupts to handle low level functions like ADC capture and UART I/O which allows for a simple polling loop (the Main Program Loop, or MPL), real-time control system.  
+</p> 
+There is one timer interrupt, and the UART interrupt to be processed.  Timer 2 provides a series of count-down-from-N-and-halt application timer registers.  The UART interrupt is used to process input and output serial
+data.
+</p>
+Since this is a real-time system, it is important to limit how much time a particular operation can take.  The judicious use of interrupts has off-loaded much of the low-level operations.  The MPL must take the various
+inputs and act upon them.  Some use of local timing loops is employed, but only where the time value is an isolated and short one, or there is some other means for breaking out of the timing operation.  Since the
+application is relatively straightforward, the use of an RTOS was not viewed as an efficient option for such a small (8K) MCU.
+</p>
+The code is a bit complicated in the MPL.  This is largely due to the fact that the system must accommodate several state machines to allow for "real-time" response.
+</p>
+
+</p>
+The object code for the adapter is available <a href="pscntlhex.zip">here</a>.  The <i><a href="../Orion/silabspgm.pdf">"SiLabs Programming guide"</a></i> describes 
+the steps and items needed to program the project MCU.  The <a href="pscntlsource.html">source code page</a> describes where and how to access the source repo.  
+</p>
+
+</td>
+</tr>
+</table>
+<hr size="2" width="100%" align="center">
+
+</div>
+<center>
+<h2>DPS-1200FB A Modifications... <a name = "dpsmods"></a></h2>
+<a href="DPS-1200FBA_mods.pdf"><img width="563" height="222" src="DPS-1200tmb.jpg"></a>
+</p>
+<table border="0" width="900">
+<tr>
+</center>
+
+<td>
+<font size = "4">
+</p>
+See <a href="DPS-1200FBA_mods.pdf"><i>"DPS-1200FB A Modifications"</i></a> for instructions on modifying the DPS-1200FB A.  These instructions are compiled from a
+couple of sources on the interntet (see below for links to them) and distill down the basics as they pertain to this application (a series-connected
+array-of-supplies).
+</p>
+</td>
+</tr>
+</table>
+<hr size="2" width="100%" align="center">
+</div>
+
+<br>
+Here is a listing of the various project documents that are directly relevant to this project:
+</p>
+</td>
+</tr>
+</table>
+
+<table border="0" width="500">
+<tr>
+
+<td>
+<font size = "4">
+<a href="pscntlsource.html">PSCNTL Source Code Page</a> </p>
+<!-- <a href="pscntlhex.zip">PSCNTL Object Code</a> </p> -->
+<a href="../Orion/silabspgm.pdf">SiLabs Programming guide</a> </p>
+<a href="PSCNTL_SCH.PDF">PSCNTL-001 Schematic</a> </p>
+<a href="DPS-1200FBA_mods.pdf">DPS-1200 Modifications</a> </p>
+</td>
+</tr>
+</table>
+
+<hr size="2" width="100%" align="center">
+</div>
+
+<br>
+<font size = "4">
+Bibliography:
+</p>
+<table border="0" width="500">
+<tr>
+
+<td>
+<font size = "4">
+<a href="http://colintd.blogspot.ca/2016/10/hacking-hp-common-slot-power-supplies.html"><i>Hacking HP Common Slot Power supplies - 12V@100A</i></a> by Colin Tregenza Dancer (07/27/2020)</a></p>
+<a href="https://www.youtube.com/watch?v=F0QWQntPkO4"><i>HP DPS-1200FB A HSTNS-PD11 13.8v mod</i></a> by djm38fr (07/27/2020) (a you-tube video)</p>
+</td>
+</tr>
+</table>
+
+<hr size="2" width="100%" align="center">
+</div>
+
+</center>
+
+<p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><o:p>&nbsp;</o:p></p>
+
+</div>
+
+
+
+
+</body></html>
