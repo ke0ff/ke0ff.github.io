@@ -1,0 +1,558 @@
+
+<!-- saved from url=(0039)http://www.rollanet.org/~joeh/projects/ -->
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word 11">
+<meta name="Originator" content="Microsoft Word 11">
+<link rel="File-List" href="./index_files/filelist.xml">
+<link rel="Edit-Time-Data" href="./index_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title align="CENTER">The KE0FF Morse HID Project Page</title>
+<meta name="description" content="Circuit theory, software theory of operation, assembly, and operation of the Morse Code HID designed by Joe Haas, KE0FF.">
+<meta name="keywords" content="Morse to Text, Morse Code HID, USB Keyboard, QEX Design Challenge">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>J</o:Author>
+  <o:LastAuthor>J</o:LastAuthor>
+  <o:Revision>7</o:Revision>
+  <o:TotalTime>5</o:TotalTime>
+  <o:Created>2012-12-20T18:22:00Z</o:Created>
+  <o:LastSaved>2012-12-20T22:32:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>475</o:Words>
+  <o:Characters>2714</o:Characters>
+  <o:Company> DACINT</o:Company>
+  <o:Lines>22</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3183</o:CharactersWithSpaces>
+  <o:Version>11.9999</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h2
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:13.5pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:1021979350;
+	mso-list-template-ids:450297508;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:14.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]--></head><body bgcolor="white" background="../index_files/ffback.JPG" lang="EN-US" link="blue" vlink="blue" style="tab-interval:.5in"><header></header><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="5122"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+
+<div class="Section1">
+
+<div class="MsoNormal" align="center" style="text-align:center">
+
+<hr size="2" width="100%" align="center">
+
+</div>
+
+<div class="MsoNormal" align="center" >
+
+<h2 align="center" style="text-align:center">Morse HID (Human Input Device) Keyboard Project Page</h2>
+
+<p class="MsoNormal">Updated 2/22/2020 </p>
+<a href="../index.html">(Back to the Projects page...)</a>
+
+<hr size="2" width="100%" align="center">
+
+</div>
+
+<div class="MsoNormal" align="center" style="text-align:center">
+
+</div>
+<center>
+<h2>Einleitung... <a name = "synopsys"></a></h2>
+
+<p class="MsoNormal" align="center" style="text-align:center"><img width="451" height="328" id="_x0000_i1026" src="./musb_banner.jpg">
+<center>
+</p>An assembled version of my Morse USB-HID Human Input Device project.
+</center>
+<br>
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+This article describes a Morse Code device that can operate as a USB keyboard on a standard PC computer system.  Using standard Morse code input from a keyer paddle
+(standard or iambic), along with some non-standard characters (pro-signs), most of the standard keyboard keys can be generated.  The device depends on key-closure
+inputs, so it won’t “copy code” from an audio source, such as a receiver.
+</p>
+
+While this project was spurred by a design challenge (QEX May-June 2019), my idea and some of the preliminary work predates the contest announcement by several
+years.  The idea came to me while considering the conundrum of textual data input to a computer while driving.  A standard keyboard is large and difficult to
+manage with one hand.  Touch-typing would be a challenge to say the least.  Touch screens are an abomination (my opinion, to be sure, but backed by some solid ergonomics)
+for pilots and drivers, as they (the touch screens, that is) DEMAND that one look and concentrate upon the input area (this is the primary reason that texting-while-driving
+is such a bad idea).  Thus, the idea of using Morse code as an input media was born.
+</p>
+
+In terms of ergonomics, it can offer a huge benefit to anyone who must multitask their hands and eyes.  It is the penultimate “touch-type” interface (generally,
+LOOKING at a key-paddle doesn’t really help send code better, so you just don’t need to look at it).  For visually impaired users, it can offer a huge benefit
+for the same reason.  Pilots and drivers can use the interface without drawing on any visual or hand-eye acuity.  Astronauts can use such a device (with an
+appropriate prosthetic) to improve their operation of computers (if you’ve never tried to operate a keyboard in zero-G, you might not appreciate the difficulty
+that Sir Newton imparts as you strike the keys).  Finally, 20WPM is an easily achievable SENDING speed for most people – achieving that on a keyboard
+(without looking) can take a good deal of practice.
+</p>
+This project aims to create a user-definable platform (electronics and software) that adheres to international Morse Code definitions while building on that standard to create Morse "characters"
+which correspond to a standard PC keyboard key or function.  The platorm includes user-defined keys that may be configured and placed per the user's requirements without
+requiring the involvement of any other hardware (other than a mouse/trackball).
+</p>
+</td>
+</tr>
+</table>
+
+<hr size="2" width="100%" align="center">
+<center>
+<h2>Pro-signs...NOT just for breakfast<a name = "prosigns"></a></h2>
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+Key to the conundrum of interfacing a Morse input device is the fact that a typical keyboard has many more keys than there are standard Morse Code characters.  Control, shift,
+ALT, function keys, etc.., make for a real poser of a problem.  I considered these issues and came to a quick realization: make non-Morse keys pro-signs!  Several pro-signs
+are in use in over-the-air Morse code. /AR and /SK are two of the most popular.  I simply extrapolated that to control codes such as /TAB and /ESC.
+</p>
+While this works well for some combinations, it doesn’t lend itself to the infinite.  First, there are a variety of three-letter combinations that result in the same sequence
+of Morse elements.  Another observation of mine is that pro-signs are difficult to visualize if there is no change in the element type when bridging the gap between pro-sign
+characters.  For example, /AR is (*-*-*).  The “A” ends in a DAH, and the “R” begins with a “DIT”, so the pro-sign “makes sense”.  A prosign such as /SIU is very difficult
+to visualize since is there is no change in the elements between the characters.  This results in a string of 7 DITs ended with a DAH.  /SIU doesn’t really help, and one is
+left just remembering “7 DITs plus a DAH” which is only remotely obvious from the mnemonic “SIU”.  Some of my prosigns violate this approach, but I have tried to minimize these as best I can.
+</p>
+The space bar should not be forgotten either.  While humans have no significant problems with extraneous word space (in fact, it often helps many of us when receiving Morse code), this
+is not so easy to rectify in a computer without resorting to heuristic (e.g., complex) algorithms.  This would also result in the need to buffer data or resort to using
+back-space so that the Morse interface could edit what was already sent to the computer.  The "back-space" appraoch is further indicted when considering that there can be other inputs to the
+PC that can change the context of the input stream without communicating such to the other HIDs.
+</p>
+My best stab at this is by no means perfect, but it does represent a bit of elegance.  My solution: the space character, dit-dit-dah-dah (**--).  While this is a defined
+character in the Some of the foreign Morse specifications, it is not defined in the ITU specification nor any of the American Morse tables I’ve encountered.  It is also
+relatively short.  Considering that it will be entered with every word, it would be nice to make it shorter, but all of those characters are taken.  Thus, it represents
+the best compromise without resorting to modifications to the ITU Morse standard.  While there is an "auto-space" mode available (it features a 14 DIT-space pause to generate a space),
+using the explicit character means that the Morse interface does not need to try to interpret what you mean by a space - you can specify it explicitly.
+</p>
+</td>
+</tr>
+</table>
+<hr size="2" width="100%" align="center">
+
+</div>
+<center>
+<h2>Hardware Design... <a name = "hw"></a></h2>
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+At the time when I first conceived of this idea, I had just worked on some projects at my day job using TI’s Tiva family of processors.  I selected the TM4C1294 processor
+to act as the central controller for my mobile radio project (another story, entirely) which is where I ginned up the idea to use the Morse Keyboard Interface for the first time.  For this
+application, this processor family is well suited.  They feature built-in USB interfaces and startup code that makes it relatively easy to implement simple (or even complex) USB
+devices, such as a keyboard.
+</p>
+The QEX Challenge made some assumptions about the configuration of the device they proposed.  One was that it accept Morse code (but no specificity about how that might be managed).  Another
+was that there might be buttons to execute those keyboard funtions that might not have a suitable Morse analog (of which there are many).  My original implementation essentially implemented
+this scheme in that there was a keypad, rotary encoders (most with push-buttons), and a few status LEDs.  Here, I only needed the buttons and LEDs.
+</p>
+I wanted to use the TM4C123GXL LaunchPad evaluation board which features a processor that has a USB peripheral, among others.  This board has everything that I needed to implement this interface
+minus the Morse key paddles, any buttons one
+might wish to use, and an audio amplifier.  It is small and inexpensive (less than $15) and is readily available at Mouser or DigiKey.  To allow the full use of the PC keyboard schema,
+I don’t find it particularly advantageous to allow or restrict the use of interface buttons.
+Some persons will prefer one way over the other, and many may find that they prefer the buttons in some cases, and pro-signs in others.  Ultimately, I settled on a 4x5 key matrix
+with user-definable mapping so that one could implement as many (up to 20) or few (down to zero) buttons as they desired and could define them to be any character/key.  This in combination with a rich pro-sign compliment
+would allow a user to choose their operating environment.
+</p>
+4x4 keypads are fairly easy to come
+by, so I decided to use one of those as the heart of the "ancilliary" keyboard.  I added an extra row to allow some buttons to be placed beyond the location of the 4x4 keypad (e.g., at the
+location of the Morse key/paddles) which brought the matrix to 4x5.  LEDs were employed to indicate the current mode with regard to SHIFT, CNTL, ALT, WIN, CAPS-Lock, SHIFT-Lock, and keypad shift.  6 LEDs were implemented
+with some having multiple meanings (differentiated by ON, OFF, or FLASH states).  The essential system consists of a pair of paddle-switch inputs that can produce an interrupt on edges,
+a 4x5 keypad matrix interface, a system of LEDs for status (I used NFETs and current-limiting resistors to drive the LEDs), and filter/amplifier circuits to drive the side-tone signals to a speaker or pair of headphones.
+To accomodate function-options,
+a series of digital inputs are also implemented to allow for different mode selections (such as iambic A or B mode).
+</p>
+Basically, the hardware consists of the LaunchPad board, a carrier board (a pad-per-hole prototype board or an application-specific PCB), some dual row headers, switches, a pair of
+<font size = "2"><sup>1</sup>&frasl;<sub>8</sub><font size = "4">”
+stereo jacks for the key paddles and speaker/headphones, and a ribbon cable to connect the keypad.  Power and data all come from the PC USB connection.  The crucial processor pin assignments are those which
+associate with an on-chip peripheral.  The PWM Tone DACs, the LED PWM outputs, the ADC inputs, and the clock output for the switched capacitor filter are those GPIOs that are assigned
+based on this criteria.  The remaining signals do not require a unique built-in peripheral and so are assigned last.  The ARM architecture allows for multiple peripherals that can be assigned
+to a given pin (only one at a time, of course).  However, there are limits, so one can not simply choose a random pin, and then assign any desired peripheral.  Some pre-planning and juggling
+are generally needed to achieve the desired funtionality.
+</p>
+The schematic for the PCB version is shown below.  Two potentiometers act as digitized user controls for side-tone frequency and Morse code speed (or weight, depending on the status
+of a GPIO input pin).  Six LEDs are supported for CAPS-LOCK, Shift-LOCK, Keypad Shift, CTRL, ALT, and WIN.  NUMLOCK, which is aimed at a numeric-keypad, has no real analog here, so
+this indication/mode is not supported by this application.  Overall, most of the circuitry is wrapped up in conditioning and amplifying the side-tone output.
+</p>
+Not shown in the schematic is an ESD protection diode added to the LaunchPad board USB signals.  The omission of this protection is an important one that should be rectified in
+any application that plans to make serious use of USB with these boards (interestingly, the TM4C1294 LaunchPad has a protection device, but the TM4C123GXL LaunchPad does not).  Fortunately, the TI layout favors an SOT-23
+device and there are several from which to choose.  I used
+the MCC (Micro Commercial Components) ESD3V3AP-TP along with the removal of some solder mask at the appropriate spot on the LaunchPad board.  This image illustrates the modification (the
+SOT-23 device has two of its leads attached to the two thru-hole pads shown, and the other pin tied to the exposed GND next to the R30 component legend):
+</p>
+<center>
+<img width="328" height="195" src="./usb_esd_protection.png">
+</center>
+<br>
+Two side-tones are implemented, allowing two independent side-tone streams.  One is used to provide character side-tone in response to Morse paddle inputs.  The other is for system feedback.
+This allows status information to be provided by the interface.  The tones are typically operated at different frequencies to allow them to be distinguished easily by the operator.
+Both tones are implemented as separate PWM DACs that are combined and filtered by a switched capacitor LPF device (the TLC14) which then drives a headphone amplifier.</p>
+<br>
+
+<center>
+<a href="musb_schem.pdf"><img width="695" height="521" src="./musb_schem_sm.png"></a>
+</p>
+<h3>Morse HID Schematic</h3>
+<h4>(click on image for the pdf version with parts list)</h4>
+</center>
+The audio chain is relatively straightforward.  TONE_A and TONE_B are 0 to 3.3V digital PWM signals from the processor.  U1B is simply a mixer which drives
+the volume potentiometer.  U2 is a switched capacitor filter which uses a FIL_CLK, a clock provided by the processor, to set the lowpass cutoff frequency (Fc).  This clock is either
+50 or 100 times the
+desired lowpass cutoff frequency (x50 for the TLC-04 or x100 for the TLC-14) and must be very well behaved (e.g., good frequency and pulse width stability) or it will
+produce audible artifacts.  One of the Tiva timers is used to create this clock (no interrupts required) such that Fc is 2500 Hz.  This provides a very stable clock to the filter without
+incuring any software overhead (other than initialization after reset).  U1A acts as a buffer/filter along with the associated
+R's and C's - the R/C filtering helps remove the clock artifacts from the output.  U3 is an integrated "headphone" amplifier.  It can also drive an 8 ohm speaker with reasonable volume.
+</p>
+The key paddle switch inputs feature some R/C filtering and ESD protection.  The rest of the de-bounce activity is addressed in software.  The LED drivers are
+simply NFET switches with current limit resistors that push the upper bounds of the rated LED current.  Since the LED signals are PWM, the software can set
+the final brightness.  Two pots, SPEED and TONE, are connected to two A/D inputs on the processor.  Software reads the A/D results to dynamically adjust these
+quantities in response to operator changes.
+</p>
+This leaves the keypad.  The 4x5 keypad is implemented as a typical row-column key matrix whereby the software "scans" the keys one
+row at a time and looks for a switch closure on the column inputs.  Some current-limiting and R/C filtering is included to limit the bounce that the
+software will see, but as in the paddle inputs, the software also addresses de-bounce.
+</p>
+<center>
+<br>
+<a href="Morse-USB_MKII_carrier.JPG"><img width="225" height="224" src="./Morse-USB_MKII_carrier_sm.JPG"></a>
+</p>
+<h3>Morse HID PCB</h3>
+<h4>(click on image to enlarge)</h4>
+</td>
+</tr>
+</table>
+</center>
+
+<hr size="2" width="100%" align="center">
+
+</div>
+<center>
+<h2>Software Design... <a name = "sw"></a></h2>
+<h3><a href="musbsource.html">(click here to jump to the software source page)</a></h3><br>
+
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+
+Even if one were to design a custom PCB, as I have, the brunt of this project would still be software.  Software is needed to configure and service the USB connection, button presses,
+LED outputs, and key-paddle presses.  Furthermore, software is needed to interpret the paddle-presses, and produce the element (dit or dah) timings.  Finally, PWM interrupt software is used
+to generate the side-tones using a DDS sine-wave tone generator algorithm.
+</p>
+The DDS sine-tone generator is derived from software I wrote in the 1990’s for my repeater controller product.  While the ARM and its peripherals allow a greater deal of sophistication,
+the basic algorithm is unchanged and worthy of its own article (for more detail, see: <a href="https://www.nxp.com/docs/en/application-note/AN1771.pdf">https://www.nxp.com/docs/en/application-note/AN1771.pdf)</a>.
+I derived this algorithm from a TI appnote circa 1984 (to the best of my recollection, this is that appnote:
+"<a href="http://www.ti.com/lit/an/spra007/spra007.pdf">Texas Instruments Application Note, Precision Digital Sine-Wave Generation with the TMS32010, February 1984</a>" -- While this document currently
+has a cover wrapper with a 1989 publish date and a 1997 copyright date, when one examines the document, it is clear that the original dates from 1984).
+</p>
+The keyer algorithm derives from a design I produced for a Motorola 8-bit MCU.  Edge detection is used for the key inputs to allow for rollover and memory.  This allows the full
+iambic implementation to be realized (“A” or “B” type).  The original design was in assembly language, so some translation and debugging was required.  Since ARM designs generally
+provide edge detection interrupts for all GPIO pins, there is some flexibility in the pin assignment process.
+</p>
+The keypad/button support is relatively simple.  Using an interrupt timer, the code cycles through a 20-key row/column matrix and traps all closures in a matrix that mirrors the 5x4 keypad.
+The timing matrix allows for debounce and the ability to trap multiple keypresses which is crucial to allow for multiple key-press combinations (like the venerable CTRL-ALT-DEL).
+This scheme can’t allow just ANY combination, but it at least allows keys on the same row to be captured in combination.
+</p>
+LED outputs are used to indicate that a particular button feature is active (such as CAPS-Lock), and these buttons are implemented as press-to-toggle (press-to-toggle applies to the Morse entry of
+these key codes as well).  Each of the LEDs are controlled by a
+PWM output which allows the brightness of the LEDs to be easily controlled (however, this is currently only implemented as a compile-time setting).
+</p>
+This leaves the USB interface.  I must admit that I punted on this one.  I can spell U-S-B on most days, and I’ve designed a number of PCBs that transfer USB signals, but I’ve never gotten
+much into the protocol (at least, not enough to remember for any length of time).  Fortunately, TI has a set of example projects that allow one to get started using USB without having to
+know much about it.  I’m not proud of taking this approach as I like to know more about how things work, but there are only so many hours in the day.
+</p>
+The TI examples are rather fractured.  While I wanted to use the TM4C123GXL Launchpad, which features a TM4C123GH6PM microcontroller, the TI example for a keyboard USB-HID device (“usb_dev_keyboard”)
+was written for a DK-TM4C123G which uses the TM4C123GH6PGE microcontroller (the evaluation board for this processor was no longer available at the time of this writing).  Those couple of
+digits at the end make a big difference in hoe the processor peripherals are arrayed.  I made a half-dozen attempts to get the example to run on my board.  In the end, I had to start with a
+USB-gamepad example (written for the TM4C123GH6PM)
+and gradually copy/edit-in the keyboard example.
+</p>
+That was bad enough, but porting my Morse-text code turned out to be a bigger chore than the USB example.  While my code was written for another processor, it was in the same family AND it was written
+by ME, so it should have been be easy-peasy, right?  Turns out, there were several opportunities for pulled-hair before it was finally working on the "new" processor.
+A painful example of how difficult it can be to port C code that is tightly coupled to a processor’s on-chip resources.  I suppose that the use of the TivaWare kernal code might have made that task
+simpler, but that horse is well out of the barn by now.
+</p>
+Overall, the code is divided into two main files, “usb_dev_hidkybd.c” and “morse.c”.  “usb_dev_hidkybd.c” handles all of the initialization from reset, and then enters the main polling loop.  This loop repeatedly
+calls the USB and “morse.c” subroutines and processes the results if any.  It does a fair job of self-documentation, but invariably can be found to be lacking once one starts to dig into the thing.
+</p>
+I needed to track the pro-sign characters that I was "inventing", so I created an Excel spreadsheet to convert DIT/DAH patterns into the format used by my code.  To allow for extended morse
+characters, I used a 16-bit array to hold the binary representation of
+the supported Morse characters.  "0" = DIT, and "1" = DAH, with the last element at the LSB. Another, 8-bit, array holds the length of each character.  The location in the arrays correspond to
+the ASCII code, with array element "0" being the ASCII code for [space]. The spreadsheet then combines the length and element pattern to produce a unique integer.  With this unique representation,
+the spreadsheet can automatically compare a given character to all other characters in the list to see if there were any duplicates.  This proved to be very helpful as I entered all of the
+characters and then added new ones.  This screenshot illustrates the result:</p>
+<center><img width="442" height="138" src="musb_ssscreen.png"></center><br>
+The “CHAR-code”, bit-length, and “hex bitmap” data plug into the corresponding arrays in the “morse_lut.c” file which is where the look-up-tables reside.  Most of the characters are positioned
+to match their corresponding ASCII code, this is how the code originated.  However, lower-case characters have no place in this application, since the status of the SHIFT key controls the case.
+Because of this, a lookup table for the ASCII code for each Morse character was created: cw_text_map[].  The spreadsheet and the lookup tables are the primary means for adding or modifying
+custom Morse characters.  The primary care directive is that the arrays are order sensitive.  Thus, it is safest to add new characters to the end of the arrays.
+</p>
+A note on the Morse encoding scheme that I used.  With the last element of the character at the LSB of the character word, there is an appearance of oddity, even when I look back on this choice.
+It would seem to make more sense to order the elements in-step with the bit hierarchy.  It portends a big-endian/lil-endian sort of war, er, debate.  The reason for this seemingly odd ordering
+lies in how the elements are extracted.  By using a bitmask that starts at the first element, then sliding that bitmask to the right (towards the lsb), the end of the process can be easily determined:
+once the bitmask becomes zero, the end of the character has been reached, so the software knows that it is finished.
+</p>
+Reversing the order of the elements, while it may "look" more appropriate,
+would require a counter to determine when the process was finished.  Extra code that was elliminated simply by changing the order of the data.  While a small victory, this is how one writes
+code when their first experiences were with assembly code on a 2 MHz processor.  While today's microcontrollers more resemble the super-computers of the 70's and 80's, I still think it is worthwhile
+to take this approach as it places one in the proper mind-set: while powerful, these devices do not feature infinite memory nor speed.  One can still get into trouble relatively easily by not
+keeping this fact as a basic tennant of the software design.
+</p>
+<br>
+</td>
+</tr>
+</table>
+<hr size="2" width="100%" align="center">
+
+<center>
+<h2>Straight-Key Support<a name = "sks"></a></h2>
+
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+Originally, I purposefully omitted the ability to support straight-key input.  It was out of (my) scope, and seemed to be a lot of extra effort for little gain.  This changed once I had a few prototypes
+out in the hands of different operators.  One in particular suggested that he would benefit from using a straight-key rather than keyer paddles.  The straight-key is a simpler mechanical interface,
+and I generally prefer to assign some thought to the input of users before dismissing them, so I considered adding the feature.
+</p>
+As it turns out, the process of timing a single key input was not all that different from what I was already doing with the paddle code, so the change turned out to be fundamentally straightforward,
+but still it required some effort.  My approach was to buffer timings for each character's element until a "character-space" was encountered.  Then, the code would scan the buffer and perform some
+calculations to determine what threshold value to use to differentiate a DIT from a DAH.  Finally, the threshold timing value was used to construct a character code word which could be applied to the same search
+array that is used for the paddle code.  Thus, the core of the application remained largely intact, and only a couple of functions and interrupt service routines required any changes.  This made it relatively
+simple to switch between modes.
+</p>
+There are several things to track to allow for variances that are ultimately human.  REALLY good straight-key operators have a very good fist, which means that their timings are consistent
+and closely match the 1:3 ratio that the Morse standard defines for DIT:DAH and inter-element timing. Folks like me don't do so well at that, so the software had to account for timing variations that
+might occur within a given character.  For characters that featured at least one DIT and one DAH, the algorithm was pretty good at decoding.  For characters that were all of the same element,
+the software had to maintain statistics, e.g.: a running average, of the calculated DIT timing.  "Character space" is calculated from the running DIT average and thus is also adaptive.
+</p>
+Keeping the algorithm concise yet adaptive was challenge.  Ultimately, the result is reasonable as it can copy my sorry fist well enough.  A code switch and a new pro-sign, /SKS, was implemented
+to allow switching between modes (as a toggle command).  Overall, the effort to code and test, while considerable, was not as bad as I had feared.  This part of the code likely needs work, but I
+won't be able to push it much further without getting some field time in the hands of other operators.
+</p>
+<br>
+
+</td>
+</tr>
+</table>
+<hr size="2" width="100%" align="center">
+
+</div>
+<center>
+<h2>The PCB... <a name = "pcb"></a></h2>
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+
+All of the components for this project can be ordered from www.mouser.com or the electronic retailer of your choice.  
+An e-mail to me is the current means by which to order PCBs (see the pdf documents referenced on this page for the e-mail address).  Gerber files are provided, so you may 
+order your own set from your favorite PCB FAB.
+</p>
+The PCB features relatively large surface mount components such that most folks experienced at soldering should be able to assemble the board with minimal difficulty.
+PCBs are currently available in limited quantities.  Lead-times are generally reasonable, but still expect 2 to 3 weeks to ship.
+</p>
+For the moment, I can only say that PCBs should be available along with the data on this page, which includes a <a href="musbmanual.pdf"><i>"Morse HID Operations Manual"</i></a>.
+Kits, partial or otherwise, are possible, but at the moment no firm plans are in place for this option.
+</p>
+</td>
+</tr>
+</table>
+</table>
+<hr size="2" width="100%" align="center">
+
+<center>
+<h2>das Ende...</h2>
+<table border="0" width="900">
+<tr>
+</center>
+
+<td>
+<font size = "4">
+In addition to the hardware and software, there are ergonomic considerations that are important to consider.   I have found that the incorporation
+of a track-ball, 4 "buttons", and a set of Iambic paddles into a single, blended HID to be an optimal solution.  It places all of the elements in one
+spot, allowing one point of input.  This is a view of my MARK-I attempt:</p><br>
+
+<center><a href="cluster2.jpg"><img width="366" height="316" src="cluster2_sm.jpg"></a></center><br>
+
+Duct-tape is not as "stretchy" as electrical tape, so the electrical tape won out for this application.  The track-ball is tilted slightly on a 3D printed base.  The iambic
+paddles are worth their own page - I fashioned them on a principal similar to my <a href="../MobileRadio/Iambic_Key_Paddles.pdf">mobile paddles</a>
+but using cheaper methods and materials.  The idea being that I wanted a very small, self-contained "switch-core" that could be made part of a larger assembly.  The result was
+mostly good, but the sloppy nature of PVC caused some unforeseen complications.</p>
+
+MARK-II came not long after:</p><br>
+
+<center><a href="cluster3.jpg"><img width="367" height="301" src="cluster3_sm.jpg"></a></center><br>
+
+Here all of the elements are unified into one assembly. It is at this point where the utility of the Morse keyboard becomes fully realized. While the MARK-II lash-up is ungainly, it shows
+great promise. I now have no excuse NOT to use the device - anytime, anywhere. This has also allowed for more extensive testing across many PC applications which led to some recent SW changes
+to address a flaw in how the SHIFT and CNTL keys were implemented. The addition of 4 more buttons adds some complexity, but they are very useful for some of my CAD programs.</p>
+
+Overall, this collection of interfaces makes for an appliance that is highly useful. Further integration and miniaturization is warranted and effort to this end will continue. At this writing,
+a 2nd spin of the PCB is enroute to my doorstep which incorporates the Tiva MCU and a 2-port USB hub onto a PCB that is only a bit larger than the first PCB. This will allow all of the electronics
+to be placed under the track-ball mouse reducing size and weight considerably. More news and pictures as they develop.
+</p>
+
+<center>
+<a href="musb_hub.jpg"><img width="790" height="388" src="musb_hub_sm.jpg"></a><br>
+<br>
+Simulated 3D view of the Morse Keyboard with built-in USB HUB
+<br>
+</center>
+
+<br>
+<hr size="2" width="100%" align="center">
+<br>
+
+Here is a listing of the various project documents that are directly relevant to the Morse HID:
+</p>
+</td>
+</tr>
+</table>
+
+<table border="0" width="500">
+<tr>
+
+<td>
+<font size = "4">
+<a href="musbsource.html">Morse HID Source Code Page</a> </p>
+<a href="musbmanual.pdf">Morse HID Operations Manual</a> </p>
+<a href="musbcalc.xlsx">Morse Code conversion spreadsheet</a> </p>
+<a href="musb_codemap.pdf">Morse Code Map (cheat-sheet)</a> </p>
+<a href="musb_schem.pdf">Morse HID Schematic and Parts List</a> </p>
+<a href="musb_dsnP99.zip">Morse HID PCB Design (Protel99 SE)</a> </p>
+<!--<a href="musb_dsnALT.zip">Morse HID PCB Design (Altium)</a> </p>-->
+<a href="musb_dsnASC.zip">Morse HID PCB Design (ASCII format)</a> </p>
+<a href="msub_gerbers.zip">Morse HID PCB Gerber Files</a> </p>
+<!--<a href="musb_dsnHUB.zip">Morse HID+HUB PCB Design (Altium)</a> </p>-->
+</td>
+</tr>
+</table>
+
+<hr size="2" width="100%" align="center">
+
+</div>
+
+<p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><o:p>&nbsp;</o:p></p>
+
+</div>
+
+
+</body></html>
