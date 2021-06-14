@@ -180,7 +180,7 @@ ul
 <td>
 <center>
 
-This is a clone of the ICOM IC-901 CTCSS encoder board to allow the drop-in, form, fit, and function replacement of a lost or damaged decoder board.</p>
+This is a clone of the ICOM IC-901 CTCSS encoder board to allow the drop-in, form, fit, and function replacement of a lost or damaged encoder board.</p>
 
 A small microcontroller is used to capture digital information from the IC-901 as clocked serial data and use
 the captured data to generate the desired CTCSS tone.</p>
@@ -211,7 +211,7 @@ the <a href="http://www.silabs.com">SiLabs</a> C8051F530 microcontroller used fo
 </center>
 <td>
 <font size = "4">
-This project was born of necessity when an IC-901 that I purchased arrived with no encode board.  Since these boards were not options (they were included with all the radios as far as I'm aware)
+This project was born of necessity when an IC-901 that I purchased arrived with no encode board.  Since these boards were not options (they were included with all the radios sold, as far as I'm aware)
 there aren't really any floating around on the open market.  Hence the need to re-create the functionality. This web page details the hardware and software design for this project. 
 </p>
 </td>
@@ -232,7 +232,7 @@ I was hoping to use an Atmel ATtiny-3217 for this project, but I found that the 
 This led me back to my trusty C8051F530.  The tone generator was copied from the HM-133 project, so more time ended up spent on removing code rather than adding.
 </p>
 The hardware is pretty simple.  There is a crystal and a couple of loading caps and a bootstrap resistor to create the frequency reference.  Some filtering is needed for the DDS PWM-DAC,
-a pot for level adjustment, and a connector to mate with the IC-901 connector.  Level interrupts were to be used to capture the serial clock and strobe signals so this constrained the
+a pot for level adjustment, and a connector to mate with the IC-901 connector.  Edge interrupts were to be used to capture the serial clock and strobe signals so this constrained the
 selection of the I/O pins for these signals. The PWM-DAC is the same as for the HM-133, and this also constrained the selection of I/O.
 </p>
 Once the I/O pins were assigned, a couple of poles of RC filtering were added along with the same level circuit as used on the ICOM verion of the board.  With the help of a S.C.A.B. board
@@ -269,7 +269,7 @@ removed once the programming and debug were concluded.
 The software operates completely using interrupts.  The main loop is empty except for an instruction to place the MCU into a "wait-for-interrupt" state.  
 </p> 
 There is one timer interrupt, and one Programmable Counter/timer Array (PCA) interrupt.  The timer interrupt (Timer 1) handles the code to process the DDS tone generator.
-The PCA captures SCLK and STB edges and parses them into an 8-bit result which contains information on tone frequency and tone on/off status.
+The PCA captures SCLK and STB edges and parses them into an 8-bit result which contains bit-mapped information on tone frequency and tone on/off status.
 </p>
 Timer 1 implements a simple, 1-tone DDS generator that is phase-accumulator based (see <a href="https://www.nxp.com/docs/en/application-note/AN1771.pdf">NXP's AN1771</a> for a detailed treatise
 on the subject).  For the DAC, one of the PCA PWMs is used, but not as an interrupt.  The idea is that since timer 1 and the PCA run off of the same clock base, they will remain synchronized.
@@ -286,7 +286,7 @@ Measurements using a toggle function at an un-used I/O pin indicate that the ISR
 more headroom, but this isn't likely needed for the purposes of gaining more processor cycles.
 </p>
 I did not manage to conjur a bug-free application on the first pass.  I ended up with a couple of bugs that were minor, but one took a bit of hair-pulling to locate.  The first bug found was
-in the shift code.  I shifted the data in the wrong direction.  The second bug was a cut-n-paste error and was the hardest to find.  The pasted line was edited except for the type cast, which
+in the shift code.  I shifted the data in the wrong direction (D'OH!!!).  The second bug was a cut-n-paste error and was the hardest to find.  The pasted line was edited except for the type cast, which
 left it with the wrong data size for an extern reference.  No error or warning resulted, but the code didn't work right. Close, but no cigar. Overall, it came together rather well and does
 what it needs to do.
 </p>
