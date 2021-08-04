@@ -1,0 +1,1095 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word 11">
+<meta name="Originator" content="Microsoft Word 11">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title align="CENTER">The IC-900 Remote Controller Clone Design Page</title>
+<meta name="description" content="Circuit theory, software theory of operation, assembly, and operation of an IC-900 Remote Controller interface clone designed by Joe Haas, KE0FF.">
+<meta name="keywords" content="ICOM IC-901, IC-900, UX-29, UX-39, UX-39, UX-49, UX-129, TIVA, ARM, Saleae, Logic 4">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>J</o:Author>
+  <o:LastAuthor>J</o:LastAuthor>
+  <o:Revision>7</o:Revision>
+  <o:TotalTime>5</o:TotalTime>
+  <o:Created>2012-12-20T18:22:00Z</o:Created>
+  <o:LastSaved>2012-12-20T22:32:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>475</o:Words>
+  <o:Characters>2714</o:Characters>
+  <o:Company> DACINT</o:Company>
+  <o:Lines>22</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3183</o:CharactersWithSpaces>
+  <o:Version>11.9999</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h2
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:1021979350;
+	mso-list-template-ids:450297508;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:14.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+</head>
+<body bgcolor="white" background="../index_files/ffback.JPG" lang="EN-US" link="blue" vlink="blue" style="tab-interval:.5in">
+<header></header>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="5122"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+
+
+
+
+<div class="Section1">
+
+<div class="MsoNormal" align="center" style="text-align:center">
+
+<hr size="2" width="100%" align="center">
+
+</div>
+
+<div class="MsoNormal" align="center" >
+
+<h2 align="center" style="text-align:center">IC-900 Remote Controller Clone Project Page</h2>
+
+<p class="MsoNormal">Updated 08/03/2021 </p>
+<a href="../index.html">(Back to the Projects page...)</a>
+
+<hr size="2" width="100%" align="center">
+
+</div>
+
+<div class="MsoNormal" align="center" style="text-align:center">
+
+<hr size="2" width="100%" align="center">
+
+</div>
+<center>
+<table border="0" width="900">
+<tr>
+</center>
+<td>
+<font size = "4">
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>I’ve worked with the IC-901 radios and the IC-900 band
+modules for many years, but have not actually owned an IC-900 radio until
+recently.<span style='mso-spacerun:yes'>  </span>The IC-900 is the predecessor
+to the IC-901, and has a similar form-factor in that they both have expandable
+frequency coverage by way of add-on TX/RX band modules (some of the IC-900
+modules can also be used with the IC-901).<span style='mso-spacerun:yes'> 
+</span>For the IC-900, there are 6 FM add-on modules: 10m, 6m, 2m, 220, 440, and
+1296.<span style='mso-spacerun:yes'>  </span>Photo 1 illustrates the
+distributed nature of this radio.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>What is really amazing to me is that this radio model was
+first introduced in 1987, making it a contemporary antique by some standards –
+yet, it still has features that are difficult, if not impossible, to find in
+more modern radios.<span style='mso-spacerun:yes'>  </span>Decades after being
+discontinued the radio and its accessories are still sought after by some.<span
+style='mso-spacerun:yes'>  </span>This 2-part article describes my efforts to
+clone the remote control hardware for this radio.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1026" type="#_x0000_t75" style='width:391.5pt;height:174pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image003.jpg" o:title="icom-ic-900"/>
+</v:shape><![endif]--><![if !vml]><img width=522 height=232
+src="IC900RDU_Clone_files/image004.jpg" v:shapes="_x0000_i1026"><![endif]></p>
+
+<p class=MsoNormal align=center style='text-align:center'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'>Photo 1.<span
+style='mso-spacerun:yes'>  </span>The essentials of the IC-900 system.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>A Brief Sojourn down the Rabbit
+Hole…</b></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>I recently purchased the three main
+components of an IC-900 (the “A” and “B” logic units and the remote controller)
+where they were advertised as “for parts only”.<span style='mso-spacerun:yes'> 
+</span>There were no cables, so I gambled that the main reason they didn’t work
+was, ah… that there were no cables.<span style='mso-spacerun:yes'>  </span>After
+fabricating the missing cables, the gamble paid off and I had a working
+radio.<span style='mso-spacerun:yes'>  </span>There was one small problem:
+there were a couple of segments on the controller display that would start
+flashing shortly after turning on the radio.<span style='mso-spacerun:yes'> 
+</span>I first thought it might be the “zebra” connectors that attach the LCD
+glass to the PCB.<span style='mso-spacerun:yes'>  </span>However, the flash
+rate was very regular, and I could manipulate the radio state with the controller
+buttons and get the flashing to stop (by putting the radio into a mode whereby
+the indicated segments flash normally, and then getting out of that mode
+whereby the flashing was supposed to cease).<span style='mso-spacerun:yes'> 
+</span>This worked consistently, but the flashing would always return after a
+few seconds or at most, a minute.<span style='mso-spacerun:yes'>  </span>This
+essentially ruled out the “zebra” connectors.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>So, next I figured that there was a
+signal integrity issue between the processor and the LCD controller chips – a
+synchronous-serial peripheral interface (generally referred to as SPI or SSI) is
+used to clock commands and data into the chip’s internal registers – noise on
+the clock or data could twiddle a bit that started the flashing.<span
+style='mso-spacerun:yes'>  </span>After using an oscilloscope to examine the
+clock and data lines, there wasn’t any conclusive evidence either way. <span
+style='mso-spacerun:yes'> </span>I then started looking for physical problems
+like cracked traces or solder connections.<span style='mso-spacerun:yes'> 
+</span>Using a microscope, freeze spray, and flexing the circuit card, I tried
+to produce the issue on demand or make it fail to appear.<span
+style='mso-spacerun:yes'>  </span>None of these techniques revealed anything
+until I applied some bending pressure to the PCB and heard a pronounced “SNAP”…
+after which, nothing worked correctly.<span style='mso-spacerun:yes'> 
+</span>It is likely that I had cracked the large (64 pin) DIP controller IC
+body and possibly the die itself.<span style='mso-spacerun:yes'>  </span>Two
+words came to mind: Un-fortunate.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>Downtrodden, I pondered my
+options.<span style='mso-spacerun:yes'>  </span>IC-900 remote controllers are
+hard to find by themselves and they are the weakest link in the system and thus
+the most likely to suffer damage in real use.<span style='mso-spacerun:yes'> 
+</span>So, that option didn’t seem very probable.<span
+style='mso-spacerun:yes'>  </span>The controller I.C. is a mask-programmed
+microcontroller, long out of production, so finding a replacement was more of a
+long-shot than finding another remote controller.<span
+style='mso-spacerun:yes'>  </span>The only other option I could see with a
+modicum of possibility for success actually seemed the most far-fetched: build
+a new controller board using a modern ARM microcontroller, and write a control
+application from scratch.<span style='mso-spacerun:yes'>  </span>As rabbit
+holes go, maybe not so bad?</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>See, I’m very familiar with the
+general premise of the IC-900/901 control scheme as I’ve reverse-engineered the
+IC-901 controls and deployed that knowledge in several projects.<span
+style='mso-spacerun:yes'>  </span>This means I know how to construct control
+words for the radio modules, a key step to success. <span
+style='mso-spacerun:yes'> </span>Not rocket science, to be sure, but it is one
+less thing to have to figure out.<span style='mso-spacerun:yes'>  </span>In the
+case of the IC-900, the service manual was very forthcoming regarding the
+serial protocols and field IDs (much more so than for the IC-901).<span
+style='mso-spacerun:yes'>  </span>I also managed to locate a datasheet for the
+LCD controller chips, so reproducing the data stream to use the original
+display didn’t seem all that far fetched after all.<span
+style='mso-spacerun:yes'>  </span>I mean, how deep can a rabbit hole be?!?!?</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>Data Capture Options</b></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>While the IC-900 service manual has
+a fair amount of information about the data formats and structures used between
+the remove controller, LCD, and the base unit, there are still questions about
+some of the details of how the data fields behave.<span
+style='mso-spacerun:yes'>  </span>In considering the LCD controller data path,
+the main piece of missing information was how the LCD controller chip segment
+registers map to the physical glass segments.<span style='mso-spacerun:yes'> 
+</span>Also, initialization info for the LCD chips would be best measured
+rather than pondered.<span style='mso-spacerun:yes'>  </span>So, I needed a
+tool to capture the data sent to these various sub-systems so that I could
+answer questions as to how they are to behave.<span style='mso-spacerun:yes'> 
+</span>The primary tool for such tasks is the logic analyzer.<span
+style='mso-spacerun:yes'>  </span></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>A logic analyzer has some aspects
+that are similar to an oscilloscope and others that are somewhat different.<span
+style='mso-spacerun:yes'>  </span>For instance, with a logic analyzer, we
+typically only are interested in the logic state of a signal, “1” or “0” rather
+than the “analog” voltage-waveform that an oscilloscope reports.<span
+style='mso-spacerun:yes'>  </span>Also, we generally want to capture large
+amounts of data (seconds or sometimes minutes worth).<span
+style='mso-spacerun:yes'>  </span>Some newer oscilloscopes blur the line
+between oscilloscope and logic analyzer (some logic analyzers also “give as
+good as they get”), but stand-alone logic analyzers are still relevant.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>I own an old-school HP logic
+analyzer, and have been known to use it.<span style='mso-spacerun:yes'> 
+</span>However, it is old, and large, and difficult to export data for
+post-processing.<span style='mso-spacerun:yes'>  </span>I generally end up
+writing a simple application for a convenient microcontroller to capture the
+data I want and output it to a PC via a terminal emulator.<span
+style='mso-spacerun:yes'>  </span>Custom-capture using an MCU and custom
+software generally works, but it takes at least some effort and time to get a
+tool up and running (sometimes, a lot as no software project ever goes together
+without some amount of unplanned debug effort).</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>In contrast to these options, I
+recently obtained a small (actually, VERY small) logic analyzer from a good
+friend that captures data using a PC application via a USB connection.<span
+style='mso-spacerun:yes'>  </span>The Saleae Logic 4 (<a
+href="https://www.saleae.com/">https://www.saleae.com/</a>), shown in Photo 2,
+is a 4-channel logic analyzer in a 1.6”x1.6”x0.35” package (like I said, VERY
+small).<span style='mso-spacerun:yes'>  </span>I was able to use it to capture
+LCD serial data and also the 29 and 30 bit asynchronous data streams used by
+the IC-900.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:231pt;height:219pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image005.jpg" o:title="IMG_2695sm"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=308 height=292
+src="IC900RDU_Clone_files/image006.jpg" v:shapes="_x0000_i1027"><![endif]></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><span
+style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'>Photo
+2.<span style='mso-spacerun:yes'>  </span>Logic analyzer setup for LCD data
+capture.</p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>With only 4 channels, there were
+limits to what I could capture, but I was <i style='mso-bidi-font-style:normal'>just</i>
+able to get what I needed with respect to the LCD serial connection (Saleae
+offers wider channel devices, but this is what I had available).<span
+style='mso-spacerun:yes'>  </span>This allowed me to easily capture data and
+correlate bit-field behavior against what was happening with the radio
+controller and radio system.<span style='mso-spacerun:yes'>  </span>In case you
+are wondering how I accomplished this with a broken controller, I didn’t.<span
+style='mso-spacerun:yes'>  </span>I had to borrow a working one from another
+friend.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>The data from the LCD capture in combination
+with the datasheet for the LCD controller chip allowed me to deduce/confirm the
+LCD initializations, and how some of the data was being transferred to the LCD
+space (there is a 7-segment decode mode supported by the chipset that ICOM used
+for all of the 7-segment digits, confirmed by the data capture).<span
+style='mso-spacerun:yes'>  </span>This process also confirmed that even though
+the LCD chipset can operate at 3.3V, the LCD glass requires a 5V bias setup to
+work properly.<span style='mso-spacerun:yes'>  </span>This early discovery allowed
+me to abandon the idea of a 3.3V LCD supply <b style='mso-bidi-font-weight:
+normal'>before</b> spinning a PCB.<span style='mso-spacerun:yes'>  </span>I had
+then to add 3.3V to 5V translation buffers (74HCTxx series gates are a good
+choice for this function) to all of the LCD chip control lines that originate
+from my new, 3.3V I/O controller MCU.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1028" type="#_x0000_t75" style='width:503.25pt;height:118.5pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image007.png" o:title="U1 trace"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=671 height=158
+src="IC900RDU_Clone_files/image008.gif" v:shapes="_x0000_i1028"><![endif]></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'>Figure
+1.<span style='mso-spacerun:yes'>  </span>LCD U1 and U2 data trace with decoded
+hex data overlaid.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>I captured a widescreen screenshot
+of the graphic trace data (spanning two 2K monitors), shown in Figure 1, and
+also exported the raw data to a spreadsheet, shown in Figure 2.<span
+style='mso-spacerun:yes'>  </span>The screenshot was informative, but a
+spreadsheet allows for a lot more analysis options, which the PC software
+easily supported.<span style='mso-spacerun:yes'>  </span>I was able to break
+out the captured data and decode it into command mnemonics and 7-segment
+data.<span style='mso-spacerun:yes'>  </span>This allowed me to easily confirm
+my understanding of the uPD7225 LCD driver chips operating in this particular
+application.<span style='mso-spacerun:yes'>  </span>The “Data” and “C/D”
+columns were imported from the Saleae software export.<span
+style='mso-spacerun:yes'>  </span>The “E” column is the “Data” converted to binary,
+and the “G” column is the decoded command (decoded by Excel “IF” statements performing
+string operations on the binary data).</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1029" type="#_x0000_t75" style='width:503.25pt;height:248.25pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image009.png" o:title="lcd spreadsheet"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=671 height=331
+src="IC900RDU_Clone_files/image010.gif" v:shapes="_x0000_i1029"><![endif]></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'>Figure
+2. <span style='mso-spacerun:yes'> </span>A snippet of the LCD data decode
+spreadsheet.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>Why use an old LCD?</b></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>I wanted the cloned controller to
+“look” like the original.<span style='mso-spacerun:yes'>  </span>This was the
+primary reason for using the existing display.<span style='mso-spacerun:yes'> 
+</span>That also meant that the existing case and buttons could also be
+used.<span style='mso-spacerun:yes'>  </span>All tolled, I would only need to
+layout one PCB to replace the existing controller PCB, and the rest of the
+controller could be reused with little or no modification.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>In addition, finding an off-the
+shelf graphics display is a tough proposition.<span style='mso-spacerun:yes'> 
+</span>It has to be just the right size, have good backlight options, the right
+resolution and be relatively simple to control.<span style='mso-spacerun:yes'> 
+</span>An alphanumeric display would be easier, but a 4x20 module (the most
+likely to be the right physical size) offers a very limited display
+experience.<span style='mso-spacerun:yes'>  </span>Cost is another
+consideration: many graphics displays are rather expensive, especially if they
+use a UART interface.<span style='mso-spacerun:yes'>  </span>So, using the
+existing glass just solves a lot of potential problems.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>In other ways, however, it can be
+more difficult as the segments-on-glass are immutable (so, you are stuck
+working with what you have) and one must reverse engineer the interface between
+the controller chips and the glass.<span style='mso-spacerun:yes'>  </span>The logic
+analyzer was of much assistance with the latter as it let me deduce the
+initialization data actually used by the IC-900 controller and then parrot this
+data back to the LCD chips to produce a first-cut test of the interface.<span
+style='mso-spacerun:yes'>  </span>Once I could send data from the ARM
+microcontroller and get the display to behave appropriately, I could move on to
+the task of mapping the segments.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>This was a bit tedious, but didn’t
+take long.<span style='mso-spacerun:yes'>  </span>Figure 3 illustrates a view
+of the segments of the display.<span style='mso-spacerun:yes'>  </span>First, I
+named each segment so that I could reference it in a spreadsheet.<span
+style='mso-spacerun:yes'>  </span>Then, I wrote a command-line function for the
+ARM that allowed me to send LCD commands/data to the LCD chips using an address/data
+argument set.<span style='mso-spacerun:yes'>  </span>I could then send a
+command line to turn on successive segments in the chip segment memory and correlate
+the resulting segments with the commands/data needed to control them.<span
+style='mso-spacerun:yes'>  </span>From this I could build a comprehensive segment
+map that could then be used to build update functions for the various LCD
+“areas” (there are a couple of bar-graphs, several 7-segment digits and numerous
+annunciator graphics).</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1030" type="#_x0000_t75" style='width:208.5pt;height:113.25pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image011.jpg" o:title="segmap"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=278 height=151
+src="IC900RDU_Clone_files/image012.jpg" v:shapes="_x0000_i1030"><![endif]></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'>Figure
+3.<span style='mso-spacerun:yes'>  </span>The IC-900 LCD segment pattern (not
+all segments are shown “illuminated”)</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>The Main Control Interface</b></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>With the LCD interface nailed down,
+I turned my attention to the control interface.<span style='mso-spacerun:yes'> 
+</span>This is the bidirectional serial interface that allows the control
+module to set the radio peripherals (PLLs, audio and squelch levels, and other
+miscellaneous I/O) and also read back things like S-meter levels, the state of
+the squelch (open or closed) and other I/O related to the tone
+encoders/decoders.<span style='mso-spacerun:yes'>  </span>This interface
+traveled along a 3-wire cable which included the remote controller power connection.<span
+style='mso-spacerun:yes'>  </span>To accomplish this and keep full-duplex
+serial capability, ICOM chose to multiplex the “base =&gt; remote” serial path
+with the power connection.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>Multiplexing allows the connection
+to be simplified (vs. a half-duplex connection) while still using a 3-conductor
+cable.<span style='mso-spacerun:yes'>  </span>However, while the format was
+essentially no different from any standard 4800 baud UART interface, ICOM chose
+to pack all of the data needed into one word so that a single “character” was
+as long as 29 or 30 bits (depending on the direction).<span
+style='mso-spacerun:yes'>  </span>While the Logic 4 could handle these bit
+widths easily, there are not many on-chip-MCU UARTs that can go wider than 16
+bits.<span style='mso-spacerun:yes'>  </span>This meant that some custom
+software would be needed to send and receive these long bit-length
+“characters”.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>At this point, I simply planned for
+a pair of timer resources to be used to accomplish the grunt-work of the
+multi-byte UART peripheral needed.<span style='mso-spacerun:yes'>  </span>I
+focused mainly on grabbing the data with the logic analyzer and trying to
+deduce the bit functions.<span style='mso-spacerun:yes'>  </span>Most of the
+bit-fields were defined in the service manual, or I had knowledge from prior
+efforts (particularly in the case of PLL formats).<span
+style='mso-spacerun:yes'>  </span>However, the behavior of the bits associated
+with the tone encode and decode features were not so readily apparent.<span
+style='mso-spacerun:yes'>  </span>Thus, I spent a most of my time playing with
+these features and looking at the bit-field results.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>I used the same spreadsheet
+technique I’d used for the LCD chip data, only there were more bits and more
+fields to manage.<span style='mso-spacerun:yes'>  </span>Figure 4 shows a
+snippet of one of these spreadsheets.<span style='mso-spacerun:yes'> 
+</span>Once the field extraction formulas were written, I could capture data on
+the logic analyzer then export it to a CSV file.<span
+style='mso-spacerun:yes'>  </span>Finally, I simply copied the relevant columns
+to the new spreadsheet and the various field data would instantly (in human time
+scales, at least) be displayed.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1031" type="#_x0000_t75" style='width:7in;height:159.75pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image013.png" o:title="IC900 cntl port"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=672 height=213
+src="IC900RDU_Clone_files/image014.gif" v:shapes="_x0000_i1031"><![endif]></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'>Figure
+4.<span style='mso-spacerun:yes'>  </span>Remote Controller data reduction
+spreadsheet.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>The tone decode functions were the
+primary focus of this study.<span style='mso-spacerun:yes'>  </span>The IC-900
+supports at least two types of tone encoder/decoder.<span
+style='mso-spacerun:yes'>  </span>The UT-29 is a “standard” CTCSS type that
+uses sub-audible tones in the 67 to 250 Hz range.<span
+style='mso-spacerun:yes'>  </span>There are 38 discrete tones that can be assigned.<span
+style='mso-spacerun:yes'>  </span>These are programmed with a 5-bit control
+value.<span style='mso-spacerun:yes'>  </span>The second type of which I am
+aware is the UT-28 which is a digital code squelch unit that I have not been
+able to decipher to any significant degree.<span style='mso-spacerun:yes'> 
+</span>Common digital code squelch (DCS) uses a continuous binary bit-stream
+operating at a low bit rate (below 250 Hz) to encode a unique sequence that can
+be decoded by a receiver.<span style='mso-spacerun:yes'>  </span>Tones are
+identified by a 3-digit octal number.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>With the UT-28, there are 5 decimal
+digits used to identify a particular tone sequence.<span
+style='mso-spacerun:yes'>  </span>I can surmise that this might be a DTMF or
+STMF (Single Tone, Multi-Frequency) burst sequence, but there just isn’t any
+detailed information about the protocol available from the sources I’ve
+tried.<span style='mso-spacerun:yes'>  </span>“Faking” the presence of a UT-28
+was also not very fruitful even though this worked well for the UT-29.<span
+style='mso-spacerun:yes'>  </span>My motivation here is that a standard DCS
+system would be more useful, and I could easily design a DCS encode module to
+plug in place of the UT-28.<span style='mso-spacerun:yes'>  </span>However, the
+UT-28 appears to use a more involved interface than for the UT-29 which will
+likely require the acquisition of an actual UT-28 to allow a capture of cogent
+data.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>An Overview</b></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>Once I had determined that I could
+control the LCD and understand the behavior of the radio control words, it was
+time to start detailing the signals, and thus the tasks that the ARM needed to process/accomplish
+in terms of basic I/O operations.<span style='mso-spacerun:yes'>  </span>The
+service manual schematic was a key facilitator for this endeavor.<span
+style='mso-spacerun:yes'>  </span>I was able to take key elements from the
+original controller schematic, and create a new schematic using my
+microcontroller of choice.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>The following list illustrates the primary
+“resources” that need to be interpreted or controlled by the ARM:</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo4;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>1)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>A 19-button keypad with two toggle switches.<span
+style='mso-spacerun:yes'>  </span>The IC-900 keypad is organized as 16 switches
+mux’ed with two column signals, three discrete buttons, and two discrete,
+on/off, slide switches (here, “discrete” means a single, dedicated I/O is used).</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo4;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>2)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>An SPI com bus to the LCD controller chips consisting
+of CLK, DATA, CS1, CS2, C/D (cmd/data), BUSY, and RESET.</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo4;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>3)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>Digital UP/DOWN signals from the rotary dial encoder.</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo4;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>4)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>3 LED outputs: Main RX, SUB RX, and Main TX.</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo4;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>5)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>A “beep” output to drive a piezo speaker with a
+fixed-frequency square wave.</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l4 level1 lfo4;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>6)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>ASYNC serial data in and out, 4800 baud, 29 and 30 data
+bits (respectively), one start bit, and two stop bits.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>In addition, there were some
+“embellishments” desired:</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo5;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>1)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>A standard UART I/O port for a Bluetooth module.</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo5;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>2)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>A standard UART I/O port for user configuration.</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo5;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>3)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>At least two PWM controls – one for the LED backlight
+and another for all of the status and illumination LEDs.</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo5;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>4)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>An ADC input for an ambient light sensor (to
+auto-control the LED PWM settings)</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.25in;mso-list:l3 level1 lfo5;
+tab-stops:list .5in left 1.0in'><![if !supportLists]><span style='mso-list:
+Ignore'>5)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>Up to 2 extra switches/buttons for additional user
+input options.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>I chose to use a Texas Instruments Tiva
+MCU, TM4C123GH6PMT, mostly because I have used it before and have a decent code
+base to support it.<span style='mso-spacerun:yes'>  </span>It has 2K of EEPROM,
+which would allow for about 200 channel memories (more than triple the 60
+afforded by the original IC-900 controller), 32K SRAM, and 256K FLASH.<span
+style='mso-spacerun:yes'>  </span>I didn’t create a systematic memory
+assessment, but for the moment, these numbers seem to be sufficient, considering
+what the original controller had to work with.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>I tend to be a bottom-up, bare-metal
+SW designer, so the “base-band” or “driver” functions are the first ones I will
+end up focusing on.<span style='mso-spacerun:yes'>  </span>The idea being, once
+I have all of them finished, the “high-level” application code (hereafter
+referred as “the application”) can progress without much worry about the
+hardware interfaces.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>I also try to use interrupts as much
+as possible for I/O functions.<span style='mso-spacerun:yes'>  </span>This
+greatly reduces the overhead to the application.<span
+style='mso-spacerun:yes'>  </span>If done correctly, it ultimately reduces the processor
+cycles required to accomplish the task.<span style='mso-spacerun:yes'>  </span>Even
+though modern processors have horrific clock speeds and coding efficiencies compared
+with what I had to work with when I first twiddled with the Rockwell 6502, I
+still approach MCU development with the notion that I likely won’t have enough
+of a particular resource.<span style='mso-spacerun:yes'>  </span>Memory and
+time are infallibly finite in spite of one’s seemingly infinite creativity.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>While most modern MCUs allow some
+“mux’ing” of peripherals, the general trend is that there isn’t a lot of
+latitude for pin assignments.<span style='mso-spacerun:yes'>  </span>This means
+that it is important to consider the I/O pin-out vs. peripheral mapping when
+creating the schematic so that desirable MCU peripherals can be utilized (now or
+in the future).<span style='mso-spacerun:yes'>  </span>A little bit of
+forethought in this area can pay great dividends later if another approach is
+needed for a particular I/O scheme.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>An Interesting Misuse of Hardware</b></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>I originally pondered using a timer
+resource to accomplish the async-serial-out (TX) function.<span
+style='mso-spacerun:yes'>  </span>If the protocol had used 8 or 9 bits, I could
+have used one of the many built-in Tiva UART ports.<span
+style='mso-spacerun:yes'>  </span>However, with 30 bits of data word-width,
+this just won’t work.<span style='mso-spacerun:yes'>  </span>Then, I remembered
+using an SPI peripheral to communicate with a NeoPixel LED and decided to
+investigate that for the SOUT function.<span style='mso-spacerun:yes'> 
+</span>Turns out, many folks have used an SSI/SPI for such tasks, so it wasn’t
+particularly revolutionary, but it could help reduce processor overhead during
+serial data transmission.<span style='mso-spacerun:yes'>  </span>In the case of
+the Tiva, the SSI peripheral could run as wide as 16 bits.<span
+style='mso-spacerun:yes'>  </span>By feeding the data register with two 16-bit
+values in quick succession (there is an 8-word FIFO for the SSI), and setting
+the SSI clock rate to 4800 baud, the resulting data stream would look exactly like
+a 4800 baud async data stream that is 32 bits long (30 data bits plus 1 start
+and 1 stop bit).<span style='mso-spacerun:yes'>  </span>One just had to make
+sure the start and stop bits were preset in the data words before writing them
+to the SSI data register.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>There were a couple of problems with
+this scheme.<span style='mso-spacerun:yes'>  </span>First off, I actually
+needed 33 bits to get the <b style='mso-bidi-font-weight:normal'>two</b> stop
+bits, 30 data bits, and 1 start bit dictated by the IC-900 protocol
+requirements.<span style='mso-spacerun:yes'>  </span>This was easy to
+accomplish by making sure that there was at least 1/4800 sec between the end of
+one SOUT word and the start of the next (providing the missing stop-bit).<span
+style='mso-spacerun:yes'>  </span>In the real application for this radio, there
+are no use-cases where these messages need to be sent quickly, but one will
+still need to have some method of pacing to ensure that the 2<sup>nd</sup> stop
+bit happens every time.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>The second issue was a bit more
+perplexing: For the NRZ data format used here (as is typical for the most
+common async UART data format) the signal needs to idle high, go low for the
+start bit duration, go high/low as needed at each data bit boundary, then
+return high (and stay there) for the stop bit(s) and subsequent idle time until
+the next start bit.<span style='mso-spacerun:yes'>  </span>However, the Tiva SSI
+peripheral on this variant doesn’t let the data output remain at its last state
+(in this case, a “1”).<span style='mso-spacerun:yes'>  </span>Once the SSI
+transfer is complete, the data line drops to logic “0”.<span
+style='mso-spacerun:yes'>  </span>Rather inconvenient, I must say.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>There were three options: 1) Abandon
+the SSI approach and use the original timer-based approach (this would increase
+the processor overhead with an interrupt at each bit-time).<span
+style='mso-spacerun:yes'>  </span>2) Send SSI “idle” words of all “1’s”
+continuously to make sure the data line never goes to zero until a new word is
+ready to send.<span style='mso-spacerun:yes'>  </span>This would also increase
+the processor overhead, but less than for the first option – it would also add
+a random latency of up to 16 bits (a little over 3 ms) to new data words since
+you can’t easily terminate an in-progress SSI TX operation.<span
+style='mso-spacerun:yes'>  </span>3) Add an inverter I.C. to the serial line
+and invert the data in SW before writing to the SSI data register (requires an
+additional component and a small amount of additional code to invert the data).</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>Ultimately, I went with option
+3.<span style='mso-spacerun:yes'>  </span>The cost of the inverter is essentially
+zero in this case since there was already a buffer in the design (for voltage
+level translation) – all that had to be done is to change the part to an
+inverter.<span style='mso-spacerun:yes'>  </span>The additional code to invert
+the data is much less than would be needed by option (1) or (2) and there is no
+random latency as in option (2).<span style='mso-spacerun:yes'>  </span>I was
+able to re-use the logic analyzer here to unit-test the software module, as
+shown in Photo 3 and Figure 5.<span style='mso-spacerun:yes'>  </span>This
+allows the code to be “released” with good confidence that it will work
+correctly for the application when needed.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1032" type="#_x0000_t75" style='width:210pt;height:207pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image015.jpg" o:title="IMG_2678sm"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=280 height=276
+src="IC900RDU_Clone_files/image016.jpg" v:shapes="_x0000_i1032"><![endif]></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'>Photo
+3.<span style='mso-spacerun:yes'>  </span>Unit-test setup for the SOUT
+async-via-SSI scheme.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>The circuitry for the serial data
+inverter is on the bottom side of the proto board shown in Photo 3.<span
+style='mso-spacerun:yes'>  </span>Figure 5 shows the input data (via the Terra
+Term window) and the logic analyzer result.<span style='mso-spacerun:yes'> 
+</span>This logic analyzer allows for very flexible analyzer options, which
+proved useful here as the data format is odd with respect to “normal” UART data
+(e.g., wide data path and msb-first formatting).<span
+style='mso-spacerun:yes'>  </span>Note that the captured data matches the
+“0x0AAA5555” test input data.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1033" type="#_x0000_t75" style='width:436.5pt;height:337.5pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image017.png" o:title="SOUT unit test"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=582 height=450
+src="IC900RDU_Clone_files/image018.gif" v:shapes="_x0000_i1033"><![endif]></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'>Figure
+5.<span style='mso-spacerun:yes'>  </span>The logic analyzer capture result for
+the SOUT unit-test</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>Time to Shoot the Engineer…</b></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>Sounds a bit maudlin, but it is a
+term often used in the design world to signal the end of prototype
+development.<span style='mso-spacerun:yes'>  </span>Left to our own devices, we
+engineers will often design to perfection, seemingly oblivious of anything
+resembling a schedule.<span style='mso-spacerun:yes'>  </span>Thus, someone
+needs to “shoot” us to end the task (and sometimes, our misery) and move
+on.<span style='mso-spacerun:yes'>  </span>After some well needed hardware and
+software testing, some 3D interference checks, and lots of tweaking, I finally
+declared “completion” of the PCB layout and placed an order for several copies
+from my latest Chinese PCB source: JLCPCB.com (<a href="https://jlcpcb.com/">https://jlcpcb.com/</a>).<span
+style='mso-spacerun:yes'>  </span>Without vendors like this, many of my
+projects just wouldn’t be practical (unless I were to hit it big playing the
+lottery).<span style='mso-spacerun:yes'>  </span>In general, I get several
+copies (5 or 10) in about a week and a half for the cost of a decent dinner for
+two – WITH silkscreen and soldermask, no less.<span style='mso-spacerun:yes'> 
+</span>Such a deal!</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1034" type="#_x0000_t75" style='width:503.25pt;height:153pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image019.png" o:title="ARM controller 3D"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=671 height=204
+src="IC900RDU_Clone_files/image020.gif" v:shapes="_x0000_i1034"><![endif]></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'>Figure
+6.<span style='mso-spacerun:yes'>  </span>3D view of the CAD file for the new
+control board</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>Figure 6 illustrates a 3D view of
+the layout and the schematic is included at the end of this document.<span
+style='mso-spacerun:yes'>  </span>The power switch, a connector for the
+piezo-speaker, and two slide switches will be harvested from the original ICOM
+PCB for use on the new board.<span style='mso-spacerun:yes'>  </span>The rest
+of the components will be new.<span style='mso-spacerun:yes'>  </span>U11 can
+be seen in the upper left of the Figure 6 view.<span style='mso-spacerun:yes'> 
+</span>This is the Bluetooth module which will allow for a number of enhancements
+regarding control and configuration for the new control system.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>Other enhancements over the original
+design include a switching power supply for the 5V regulator for improved power
+efficiency, ambient light sensors for controlling illumination and status LED
+brightness, and two additional switches (I haven’t yet determined what these
+switches will do for certain).</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>Testing, TESTING… is this thing
+ON???</b></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>The PCB’s arrived – WOOHOO!<span
+style='mso-spacerun:yes'>  </span>Right off the bat, I found an issue with a
+connector footprint.<span style='mso-spacerun:yes'>  </span>I measured twice,
+but still goofed it.<span style='mso-spacerun:yes'>  </span>The footprint was
+useable, but this was just the beginning.<span style='mso-spacerun:yes'> 
+</span>Ultimately, there were a handful of relatively benign issues, most
+relating back to either a mistake in the schematic or a mistake in the circuit
+design.<span style='mso-spacerun:yes'>  </span>The good news is that the
+mechanical aspects of the layout (other than the connector footprint) were in
+good shape, so the board fits well into the existing ICOM case with no serious
+hacking required.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>It took less than a week to assemble
+and perform the basic testing and debug of the board.<span
+style='mso-spacerun:yes'>  </span>Ultimately, I was able to send a canned
+message stream to the base unit to activate the RF modules, allowing me to
+confirm that I could receive a signal – truly a big step in the right direction.<span
+style='mso-spacerun:yes'>  </span>Photo 4 shows the board placed inside the
+ICOM housing back-shell.<span style='mso-spacerun:yes'>  </span>In the photo,
+the LCD/Keypad unit has not yet been attached.<span style='mso-spacerun:yes'> 
+</span>Because of the nature of the flex cable interconnect I wanted to finish
+the testing of the other systems first (a good choice, as it turned out). </p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1035" type="#_x0000_t75" style='width:469.5pt;height:175.5pt'>
+ <v:imagedata src="IC900RDU_Clone_files/image021.jpg" o:title="IMG_2702sm"/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=626 height=234
+src="IC900RDU_Clone_files/image022.jpg" v:shapes="_x0000_i1035"><![endif]></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'>Photo
+4.<span style='mso-spacerun:yes'>  </span>The assembled RDU Clone PCB.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>The LCD/Keypad unit required some
+modifications before connecting.<span style='mso-spacerun:yes'>  </span>In
+addition to the replacement of the EL backlight with an LED strip and diffuser
+(a whole project in itself), I had to isolate the LED 5V supply from the LCD
+controller I.C. 5V supply.<span style='mso-spacerun:yes'>  </span>This would
+allow the LED supply to be controlled with a PWM signal, while leaving the I.C.s
+to have a constant 5V supply.<span style='mso-spacerun:yes'>  </span>This was
+just a couple of trace cuts and wires and didn’t require any of the switches to
+be removed.<span style='mso-spacerun:yes'>  </span>The ICOM enclosure also
+needed some trimming.<span style='mso-spacerun:yes'>  </span>The addition of S5
+and S4 meant that access holes needed to be cut.<span
+style='mso-spacerun:yes'>  </span>Also, the new part used for the 2.5mm
+PWR/DATA connection didn’t fit the same as the original, so that opening needed
+to be modified also.<span style='mso-spacerun:yes'>  </span>A bit of good news
+was that the LCD/Keypad PCB was free of any interference issues.<span
+style='mso-spacerun:yes'>  </span>Overall, while the testing revealed more
+errors than I’d hoped for, they were relatively minor and the result is highly
+usable.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>The Future’s Bright… Where’s my
+Shades?</b></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>Now that the hardware is together, I
+can work in earnest on the software.<span style='mso-spacerun:yes'>  </span>As
+mentioned previously, I’ll concentrate on finishing the driver-level SW
+first.<span style='mso-spacerun:yes'>  </span>Then, I’ll move to a simple
+application that provides some basic radio functionality.<span
+style='mso-spacerun:yes'>  </span>This will offer an opportunity to debug the
+low-level SW before moving deeper into the “final” application.<span
+style='mso-spacerun:yes'>  </span>Ultimately, I hope to end up with a
+full-featured radio that meets or exceeds the original in terms of features and
+usability.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>For example, having recently
+completed a cross-country road-trip with my IC-901, I have a few ideas about
+how to better handle this use-case.<span style='mso-spacerun:yes'>  </span>Here,
+one is driving in and out of range of many different repeater systems along a
+given road-trip.<span style='mso-spacerun:yes'>  </span>This generally entails
+a lot of frequencies, offsets, and tone parameters to manage.<span
+style='mso-spacerun:yes'>  </span>Having the ability to pre-load all of the
+repeaters for a trip would be a very helpful feature.<span
+style='mso-spacerun:yes'>  </span>Couple this with a smart-phone app that can
+talk Bluetooth would be even more interesting.<span style='mso-spacerun:yes'> 
+</span>Features like this and others are the part of this project that really
+captures my interest.</p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'>In part 2, I’ll detail the trials
+and tribulations of the last part of this journey.<span
+style='mso-spacerun:yes'>  </span>Unfortunately, I can’t accurately predict
+when that might be.<span style='mso-spacerun:yes'>  </span>I would hope it to
+be in the range of 6 months or so, but the vagaries of life and family will certainly
+dictate this in ways that I can’t yet fathom.</p>
+</td>
+</tr>
+</table>
+<hr size="2" width="100%" align="center">
+
+</div>
+
+
+<hr size="2" width="100%" align="center">
+</div>
+
+<center>
+
+<br>
+Here is a listing of the various project documents that are directly relevant to this project:
+</p>
+</td>
+</tr>
+</table>
+
+<table border="0" width="500">
+<tr>
+
+<td>
+<font size = "4">
+<!--<a href="rdusource.html">RDU Source Code Page</a> </p> -->
+<a href="https://ke0ff.github.io/Orion/silabspgm.pdf">SiLabs/Tiva Programming guide</a> </p>
+<a href="IC900_RDU_schem.pdf">RDU Clone Schematic</a> </p>
+<!--<a href="RDU_mods.html">Remote Control Head Modifications</a> </p> -->
+</td>
+</tr>
+</table>
+
+<hr size="2" width="100%" align="center">
+</div>
+
+<hr size="2" width="100%" align="center">
+</div>
+
+</center>
+
+<p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><o:p>&nbsp;</o:p></p>
+
+</div>
+
+
+
+
+</body></html>
