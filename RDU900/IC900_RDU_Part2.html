@@ -163,7 +163,7 @@ ul
 
 <h2 align="center" style="text-align:center">IC-900 Remote Controller Clone Project, Part II</h2>
 
-<p class="MsoNormal">Updated 09/01/2021 </p>
+<p class="MsoNormal">Updated 09/17/2021 </p>
 <a href="../index.html">(Back to the Projects page...)</a></p>
 <a href="index.html">(Back to Part I...)</a>
 
@@ -196,10 +196,10 @@ control, rev/check feature, TS (freq step select), and band selection. Progress 
 attempts at building a "radio" using ICOM UX modules). Still, progress has not been without issue or pain.</p>
 </p>
 First, I still had some hardware gremlins to address. These didn't show up in the initial validation, but became obvious
-once I started exercising the user interface. Chief among these were the solder shorts: one on the ICOM key/display board, and
-one on the flex-cable connection to the new ARM board. Additionally, a failure of the SIN comm connection was a bit surprising.
-Here, the data separateor circuit was copied almost verbatim from the ICOM design, and it was tested good! However, when
-attempting to use the system I discovered that the data didn't look at all good on an o'scope (and, no surprise, wasn't working).
+once I started exercising the user interface. Chief among these were the solder shorts (all of my own making): one on the ICOM key/display board, and
+one on the flex-cable connection to the new ARM board. Additionally, the failure of the SIN comm connection was a bit surprising.
+Here, the data separator circuit was copied almost verbatim from the ICOM design, and it was tested good! However, when
+attempting to use the system I discovered that the data didn't look at all good on an o'scope (and, no surprise, wasn't being received by the MCU).
 There was a significant "RC" component to the waveform. I finally worked out that I needed a load resistor on the power/data signal
 to get the data separator to work correctly. Curious.</p>
 </p>
@@ -207,19 +207,22 @@ After considering the issue, I realized that I had tested the data separator in 
 Thus, that controller loaded the signal in such a way that my design did not. This load turned out to be in the form of the
 Iq(dc) of the LM7806 voltage ragulator used on the ICOM design. For my design, I used a switching regulator circuit which has a
 substantially lower Iq(dc). The "loaded" I(ac/dc) was in the form of a high-frequency pulse train used by the switching regulator. This
-conspired to remove the Iq(dc) of the original ICOM circuit. A typical value of Iq(dc) for the LM78xx series is about 5 mA and a
-2.2K resistor accross the 11(ish) volts at the input to the data separator provided that load rather nicely.</p>
+conspired to remove the steady Iq(dc) of the original ICOM regulator circuit. A typical value of Iq(dc) for the LM78xx series is about 5 mA and a
+2.2K resistor accross the 11(ish) volts at the input to the data separator provided that load (or more than close enough) rather nicely.</p>
 </p>
 Speaking of the switching regulator, I ended up replacing a couple of those parts because I missed a subtlety of the IC's enable pin. Most
-regulators I encounter allow the enable to be tied to Vin to force the part to be on all the time. With the part I used in this
-design, there is a 6V max limit on the voltage applied to the enable. An easy fix, but I had used this part before connecting the
-enable directly to Vin and hadn't experienced this issue. Delayed learning... Drat!</p>
+regulators I've encountered allow the enable to be tied to Vin to force the part to be on all the time. With the part I used in this
+design, there is a 6V max limit on the voltage applied to the enable pin. An easy fix, but I had used this part before by connecting the
+enable directly to Vin and hadn't experienced this issue. Apparently, 8 or so volts doesn't have the same effect as 10 or so volts.  The fine-print
+in the datasheet identifies a "zerner diode" connected across this pin to GND.  The Vz ("knee" voltage) wasn't clearly stated, but it must be
+greater than 8V, but less than 10V. Delayed learning... Drat!</p>
 </p>
-Lastly, I found that I needed to add a coin-cell battery to maintain the ARM's HIB RAM. When I originally started down this design path,
-I was pleased with myself at planning to use EEPROM to maintain the radio channel memories. A vast improvement over older designs 
+Lastly, I found that I needed to add a coin-cell battery to maintain the ARM's HIB RAM so that I could easily save the radio's state between power
+cycles. When I originally started down this design path,
+I was very pleased with myself at planning to use on-chip EEPROM to maintain the radio channel memories. A vast improvement over older designs 
 (including the IC-900) as it elliminates the need for a battery and all the mainenance headaches that come with it over time. However,
 I forgot about the fact that not only are there channel memories, but the overall state of the radio needs to be remembered during
-power-off cycles. This includes many variables that are highly transient and would not typically be maintained in EEPROM because they
+power-off. This includes many variables that are highly transient and would not typically be maintained in EEPROM because they
 can be changed often (such as settings for VFO, volume, squelch, etc...).</p>
 </p>
 One option is to monitor the supply voltage and produce an interrupt when power is removed. The idea is that the hold-up capacitance
@@ -233,7 +236,8 @@ be needed. The jury is still out on this one.</p>
 <p class=MsoNormal style='tab-stops:1.0in'><b>How NOT to write real-time code…</b></p>
 </p>
 
-Up to this point, I had been focused on hardware and low-level software.  Once the hardware was no longer an issue, I had to switch gears and
+Up to a point, I had been focused on hardware and low-level software.  Once the hardware was no longer an issue (it is often NEVER, no longer an issue, I'm afraid),
+I had to switch gears and
 start thinking more about the user interface (UI). I had a template to work from in the form of the original controller operation.  However,
 I wasn't allowing that to limit what was possible.  But in the begining, I was mostly concerned just with the basics.  Things like, get the S-meter
 to work and display the frequency.  Then, get the radio part to work at the indicated frequency.  Receive first, then transmit, and on from there.
@@ -276,8 +280,8 @@ project and source file github repo</a>.</p>
 
 <p class=MsoNormal style='tab-stops:1.0in'><b>Five-pound bucket - 10 pounds of , er, "stuff"…</b></p>
 </p>
-The primary issue with this application is actually one that an RTOS can't really help with on its own. The issue regards resource management. In this case,
-the LCD display. The problem revolves around the fact that there are a limited number of pixels in the viewing area and too many "items" that need to be
+The primary issue with this application is actually one that an RTOS can't really help much with - the issue regards resource management. In this case,
+that of the LCD display. The problem revolves around the fact that there are a limited number of pixels in the viewing area and too many "items" that need to be
 displayed. As a result, some of the display fields have to be multiplexed from different data sources. For example, there are two bargraphs in the display
 area, one for main S/RF and one for sub S/RF. However, a bargraph would be helpful to display volume and squelch.  To cover all these bases, we'd need 6
 bargraphs in total. Since there are only two, we have to timeshare the bargraphs which means that there has to a method of selecting which resource is to
@@ -327,11 +331,12 @@ just that - the memory number.  The "stock" and "new" indications are explained 
 </tr>
 <tr>
 <td style="vertical-align:top"; width="25%">MM0-MM6/SM0-SM6:</td>
-<td style="vertical-align:top">SRF Meter (main or sub).  Also used by VOL/SQU adjust (leftmost segment blinks)</td>
+<td style="vertical-align:top">SRF Meter (main or sub).  Also used to indicate VOL/SQU coarse-adjustment (leftmost segment flashes unless zero level, then
+the fine-adjustment flashes)</td>
 </tr>
 <tr>
 <td style="vertical-align:top"; width="25%">MMEM/SMEM:</td>
-<td style="vertical-align:top">Indicates memory #.  "0-9", "A-Z" (with some characters excluded for clarity) {"0-9" on the IC-900}</td>
+<td style="vertical-align:top">Indicates memory # or vol/squ fine-adjustment.  "0-9", "A-Z" (with some characters excluded for clarity) {"0-9" on the IC-900}</td>
 </tr>
 <tr>
 <td style="vertical-align:top"; width="25%">MSKP/SSKP:</td>
@@ -339,7 +344,7 @@ just that - the memory number.  The "stock" and "new" indications are explained 
 </tr>
 <tr>
 <td style="vertical-align:top"; width="25%">M00/S00:</td>
-<td style="vertical-align:top">500 Hz digit (not used by the IC-900). Blinks if CHECK/REV mode active</td>
+<td style="vertical-align:top">500 Hz digit (not used by the IC-900). Flashes if CHECK/REV mode active</td>
 </tr>
 <tr>
 <td style="vertical-align:top"; width="25%">MTNE/STNE:</td>
@@ -363,7 +368,7 @@ just that - the memory number.  The "stock" and "new" indications are explained 
 </tr>
 <tr>
 <td style="vertical-align:top"; width="25%">TS:</td>
-<td style="vertical-align:top">Indicates "B" frequency step (otherwise, "A" step) for frequency adjustments. Blinks if edit step-size is active</td>
+<td style="vertical-align:top">Indicates "B" frequency step (otherwise, "A" step) for frequency adjustments. Flashes if edit step-size is active</td>
 </tr>
 <tr>
 <td style="vertical-align:top"; width="25%">MHz:</td>
@@ -443,198 +448,219 @@ Figure 3.  IC-900 Control Unit.
 <table border="0" width="700">
 <font size = "4">
 <tr>
-
 <th align="left"; width="20%"><b>Button Name</b></th>
 <th align="left"; width="7%"><b>Focus</b></th>
 <th align="top"; width="3%"> </th>
 <th align="top"><b>Description/Where-used</b></th>
-
 </tr>
+
 <tr>
 <td style="vertical-align:top">POWER:</td>
 <td style="vertical-align:top">---</td>
 <td> </td>
 <td style="vertical-align:top">Turns the control unit (and radio) on or off</td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">VFO:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
 <td> </td>
-<td style="vertical-align:top">Selects next available band unit <i>(no effect if less than 3 units are installed)</i></td>
+<td style="vertical-align:top">Selects next available band unit <i>(no effect if less than 3 band units are installed)</i></td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">MR:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
 <td> </td>
 <td style="vertical-align:top">Toggles between memory and VFO mode.  The "M" at the MMEM/SMEM location indicates that the memory mode is active </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">SUB:</td>
 <td style="vertical-align:top">---</td>
 <td> </td>
 <td style="vertical-align:top">Toggles focus between MAIN and SUB bands.  The focus (<b>m/s</b>) determines which band is modified by user input<td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">M/S:</td>
 <td style="vertical-align:top">---</td>
 <td> </td>
-<td style="vertical-align:top">Swap main and sub bands <i>(no effect if less than 2 bands are installed)</i></td>
+<td style="vertical-align:top">Swap main and sub bands <i>(no effect if less than 2 band units are installed)</i></td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">HI/LO:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Toggles RF power level between High and Low (the actual power levels vary by module)</td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">CALL:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
-<td style="vertical-align:top">A special, 1-key memory mode </td>
+<td style="vertical-align:top">A special memory mode with 4 possible memory selections (the DIAL ir UP/DN buttons select which call channel is active) </td>
 </tr>
+
+<tr>
+<td style="vertical-align:top">CALL (hold):</td>
+<td style="vertical-align:top"><b>m/s</b></td>
+<td> </td>
+<td style="vertical-align:top">[From VFO mode]: Write VFO state to selected call-channel location<br>
+[From CALL mode]: Copy selected call-channel state to VFO</td>
+</tr>
+
 <tr>
 <td style="vertical-align:top">MW:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
-<td style="vertical-align:top">Stores the current VFO parameters to the currently selected memory location </td>
+<td style="vertical-align:top">Stores the current VFO parameters to the currently selected memory location</td>
 </tr>
+
+<tr>
+<td style="vertical-align:top">MW (hold):</td>
+<td style="vertical-align:top"><b>m/s</b></td>
+<td> </td>
+<td style="vertical-align:top">Copies the current memory state to the VFO and exits memory mode</td>
+</tr>
+
 <tr>
 <td style="vertical-align:top">TS:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Tuning Step, Toggles between the "A" step size and the "B" steps size </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">T/DS:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Toggles CTCSS/DPL squelch modes </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">DUP:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Duplex, cycles between S, +, and - TX offsets </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">DUP (hold):</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Activates offset adjust mode. Frequency display shows offset frequency and adjustment is using the thumbwheel mode </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">TONE:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Toggles CTCSS encode on/off </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">TONE (hold):</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Enters CTCSS adjust mode.  Frequency display shows CTCSS frequency </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">CHECK:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Enters or exits "reverse" mode.  If duplex = "S", there is no effect unless the key reaches "hold" status.
 								Any other key after entering "reverse" mode will cause the mode to cancel</td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">CHECK (hold):</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Enters "check" mode.  Regardless of duplex, the frequency is adjusted to the TX frequency and the squelch is opened.
 								Releasing the CHECK button exits the mode and returns operation to normal </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">MHz:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Toggles the MHz mode.  When the MHz icon is on, dial or microphone up/dn will adjust the MHz digit of the frequency.
-								In the thumbwheel mode, advances the active digit one to the right (or back to the left most digit) </td>
+								In the thumbwheel mode, advances the active digit (flashing) to the next (right, or back to the left most digit) </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">MHz (hold):</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
-<td style="vertical-align:top">Enters thumbwheel mode.  Any other button ends thumbwheel mode </td>
+<td style="vertical-align:top">Enters or exits thumbwheel mode.  Any other button also exits thumbwheel mode </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">SET:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
-<td style="vertical-align:top">Enters the configuration loop </td>
+<td style="vertical-align:top">Enters the SET configuration loop </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">SMUTE:</td>
 <td style="vertical-align:top">---</td>
 <td> </td>
 <td style="vertical-align:top">Toggles the sub-band mute status (unmutes the main band if the sub-band was muted)</td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">SMUTE (hold):</td>
 <td style="vertical-align:top">---</td>
 <td> </td>
 <td style="vertical-align:top">Mutes main band (or no operation if sub-band is unmuted)</td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">SQL down:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Adjusts the squelch down one step </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">SQL up:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Adjusts the squelch up one step </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">SQL up (hold):</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Sets the squelch to maximum (closed) </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">VOL down:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Adjusts the volume down one step </td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">VOL dn (hold):</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
-<td style="vertical-align:top">Sets the volume to zero <i>Note: this is not a mute function</i></td>
+<td style="vertical-align:top">Sets the volume to zero <i>Note: this is NOT a mute function</i></td>
 </tr>
+
 <tr>
 <td style="vertical-align:top">VOL up:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
-
 <td> </td>
 <td style="vertical-align:top">Adjusts the volume up one step </td>
 </tr>
+
 </table>
 </center>
 </p>
@@ -724,14 +750,130 @@ or 1 MHz for the 10m module).  The dial adjusts that digit (which flashes to ide
 to the left-most moveable digit if all the way to the right). You can move anywhere in the band in about 5 seconds without trying all that hard.  WAY
 better than the old way.  A small reward for being in control of the software.</p>
 </p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>Meanwhile, back at the NV Memory farm…</b></p>
+</p>
+
+Unfortunately, the whole on-chip memory situation has been constantly eroding. After working the numbers and trying to eek out as much compression as I
+could muster, I just couldn't get as many memories stored as I would have liked.  This, coupled with the NVRAM issue (requiring a battery to save the radio state)
+pushed me further and
+further away from on-chip memory until it became clear that I needed another answer: an external, non-volitile memory with at least 8K bytes
+of storage.</p>
+</p>
+I had originally considered making provision for an SPI memory, EEPROM or NVSRAM, when I was designing the PCB for this project.  The problem
+was, there just wasn't any GPIO left.  However, now that I really need such a device to alleviate my memory issues, I wish I'd spent the time
+earlier.  The good news is, given a clear need, I was able to fanagel the I/O with the help of an analog switch allowing the connection of an
+SPI memory.  It cost the "strap" GPIO, but that was a pale answer to the diode matrix configuration system of the original controller so it
+won't be sorely missed.  Since the SW is open source, one doesn't really need board-level configuration options.</p>
+</p>
+I multiplexed the memory MISO (Master In, Slave Out) connection with the LOCK switch, and used the "strap" GPIO for the memory chip-select.  The rest of the signals
+were tapped from the LCD serial bus.  I briefly noshed on the prospect of running a queued SPI, which would reduce the application load.  This
+makes sense as there will be a lot of traffic going to the external memory (the return path is only really active at power-up).  However, since
+the SPI would be shared with the LCD chips, this would require a bullet-proof resource sharing mechanism.  The results of this would ripple
+throughout the LCD display code.</p>
+</p>
+A further complication is that I would not be able to use the built-in SPI (SSI in TI/ARM-speak) but rather would have to use a bit-bang approach.
+This is due to the available I/O for MISO.  None of the available peripheral pins for MISO were easily shareable, so the effects of forcing this issue would also ripple
+throughout the design.  To mitigate these issues, I settled on a couple of comprimises: 1) use an interrupt timer to create a more consistent
+bit-rate system (increases peak bit-rate).  2) modify the NVRAM mirror transfers to limit themselves to only the bandid that is being modified.
+This 2nd approach would yield the greatest results since it would reduce the amount of data transferred up to 8-fold for any given change event.</p>
+</p>
+The other mitigation was to use a "shadow" NVRAM device with an "auto-store" feature.  These devices have been around for a while, but have not
+made it into the mainstream of popular design culture.  They are unique and offer some significant advantages.  Firstly, they are an SRAM core
+that features "infinite" write capability with effectively no write-delay (EEPROM can require up to 10ms per write-cycle). Second, there is a "shadow"
+memory of EEPROM cells that can copy the entired SRAM array in a single
+write cycle.  Memory can be moved to/from the EEPROM array at will and on power-up.  The auto-store versions will automatically copy the SRAM
+data to the EEPROM array when power is removed (a dedicated, large-value capacitor is required - typically about 100uF).</p>
+</p>
+These devices and their attendant capacitor are somewhat pricey in terms of consumer-grade electronics financial requirements, something like $6
+for the pair.  However, given that this cost is less than the cost of UPS ground shipping, it isn't really a concern in this case.  What is a
+concern is that the solution directly confronts the issues at hand and offers solutions that can be implemented with minimal effort and maximum
+results.  This photo shows the memory chip installed next to the MCU:</p>
+</p>
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1027" type="#_x0000_t75" style='width:412;height:269'>
+ <v:imagedata src="IC900RDU_Clone_files/nvram.jpg" o:title="nvram.jpg"/>
+ </v:shape><![endif]--><![if !vml]><img border=0 width=412 height=269 src="IC900RDU_Clone_files/nvram.jpg" v:shapes="_x0000_i1027"><![endif]></p>
+</p>
+<center>
+Photo 1.  NVRAM S.C.A.B. installed next to the controller MCU.
+</center>
+</p>
+One consequence of this choice of device is that it is rather large, in terms of bytes that is, 128K bytes to be exact.  As of this writing, the entirety
+of NVRAM requirements for the controller is less than 4800 bytes.  If we limit ourselves to only use 64K bytes of theNVRAM, we can squeeze up to 14 copies of this
+data into this one device.  This allows one to maintain several different "radios" with completely different configurations (most notably, stored
+memories).  A user key sequence would allow the radios to be selected on demand.  This would allow for several memory "banks" that could be used
+on a long cross-country journey, for example.</p>
+</p>
+Interestingly, this is just how the memory world is these days.  8K or 32K byte memories are almost a thing of the
+past with few new devices in these size categoies being manufactured. So, one is not rewarded in any significant way by trying to select "just the
+right size" memory device.  It is generally just as cheap and easy to go with something that has 8 or 10 times as much memory as you'll really need.
+</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>Don't forget the Memories…</b></p>
+</p>
+The memory modes have been kept at the bottom of the list for most of this project. There are a number of good reasons for this. Mainly, the structure
+of the memories is influenced by the basic format of the radio data structures. It is difficult to account for storage when you haven't nailed down
+exactly what it is you are going to store. The other aspect of this is trying to determine how the user interface will work for the memory mode. Using the original
+controller structure as a guide, which mirrors most mobile radios I've run into, there isn't much to it.  The dial selects the memory# which recalls each new
+configuration in turn.</p>
+</p>
+However, is that really all there should be? One of the ICOM HF radios I used back in the 80's would recall a memory into the "VFO".  Thereafter, you were still
+in "VFO" mode, just with a new channel context (the term "context" is meant to capture all of the radio parameters that are user-accessible from the main control
+interface). Some aspects of this paradigm are appealing, but I still want to be able to get back to the original "VFO", so some means of saving the original VFO
+are needed.  It is interesting how a seemingly mundane task can become incredibly complex once you start rolling up all the possibilities.</p>
+</p>
+Ultimately, I settled on a configuration which follows the IC-901.  While the mechanization of the memories would allow for VFO-like changes, this is prohibited
+by the fact that the dial-u/d focus is fixed on the mem/call number when either of those modes are active.  However, one can "copy" a memory or call channel into
+the VFO using the MW-hold or CALL-hold features.</p>
+</p>
+There was a fair degree of hair-pulling here.  Mostly, this was due to my fuzziness on how the memory and call-channel systems were implemented on the original
+controller.  Once I had a better handle on this and settled on how I wanted the system to behave, I needed to further refine the radio-state data structures to
+allow for the appropriate state data to be configured in real-time and also to minimize the storage calls to the NVRAM.  I resisted the solution requiring a
+duplicate copy of the VFO mode for each band.  However, this just wasn't possible in keeping with the desire to follow the radio behavior.  The extra overhead
+is minimized by the fact that the "copies" are not created unless transitioning to the mem or call mode.  Extra RAM space was needed but, as previously reported,
+this isn't really an issue here.</p>
+</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:1.0in'><b>One last Face-Punch…</b></p>
+</p>
+The whole reason for this protracted project was, as you may recall, the fact that I broke the original controller while trying to determine the source of
+some "wonky" LCD segments.  At the time, there were two competing theories as to the nature of the issue: 1) that the controller IC, or the communication link between
+the controller and the LCD chips, had developed an intermittent connection.  2) There was something wrong with one or both of the LCD chips. Option 2 seemed
+less likely as in my experience chips don't "soft-fail" very often. They either work, or die gloriously in a puff of smoke.  Still, I had located and procured
+a couple of the LCD chips just in case.</p>
+</p>
+When I decided to re-engineer the controller, I figured I'd end up solving the problem and didn't give it much more thought. Until I got the radio hardware and
+software to the point that it was displaying frequencies in the main and sub bands. Even then, it took a bit of time as the "wonky" segments don't express themselves
+for just any pattern. 443.675 MHz, a local favorite of mine, set on the sub-band is one of the patterns.  Once I was experimenting with the radio in the early stages
+of software development, I noticed, with no shortage of horror, the re-surgence of the wonky segments.  Basically what happens is that the "f" segment of the 1 MHz digit
+will activate, and the "e" segment will flash. For the aforementioned repeater, the result on the display is "449.675". Since the "e" segment is off for this frequency,
+it doesn't flash, but you can enter "146.640" and get the flashing of the "e" segment. The fact that I was seeing the exact same behavior with completely different hardware
+and software was a pretty substantial indictment of the LCD interface chip(s).</p>
+<p>
+I had so fully dismissed the idea that the LCD chip could be at fault that I pursued the wrong culprit to the extent of non-repairable damage. A lesson for those
+open to accepting it: don't suffer "target-myopia" when trying to diagnose a problem. For this project, I was very lucky to have had prior knowledge of the inner-workings
+of the IC-900 and its modules.  To have started with nothing, well, I should have rightfully passed on it and just chucked the destroyed display in the junk box.</p>
+<p>
+Luckily, the task wasn't terribly onerous, and one that I was eager to undertake. Also, having the replacement ICs in hand, I was able to easily replace the suspect
+IC (just the one associated with the wonky segments) and so far... the wonky digits remain at bay. Still, it is a black-eye to one's ego that I dearly hope to learn from.</p>
+
+
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal style='tab-stops:1.0in'><b>Where to next…</b></p>
 </p>
-Memory and SET mode features are next. I would like to get some operational testing performed first, however.  The code development has been rather
+Scan and SET mode features are next. I would like to get some operational testing performed first, however.  The code development has been rather
 hot-n-heavy up to now, and there are a number of details that have been run roughshod over. I need to populate some additional modules (I currently only
-have two attached) and spend some time tuning around and talking to folks.</p>
+have two attached) and spend some time tuning around and talking to folks.  Further, these modes aren't tall on my list.  I use memory scan on occasion, but I've
+never been impressed by the implementations I've run into.  SET mode has largely been deprecated by the button "hold" feature of my keypad implementation.  There
+are a few global configuration items (bright/dim adjustments and future bluetooth parameters) that make sense grouping into a single user-interface control point,
+but these are low priorities at the moment.</p>
 </p>
 I also need to think about the tone and digital squelch modes. The digital squelch module (UT-28) that ICOM offered looks to be un-obtainium.  In addition,
 it is proprietary, so it would only work with other ICOM radios that were likewise equipped. This simplifies things to a great extent as I can actually
@@ -739,11 +881,11 @@ think about focusing on making my own decoder for this radio.  There is a CML pa
 of effort, one could make a custom board that could be used to accomplish both modes. In addition, the RDU code would have to interface with the new
 option board and also interact with it in operation to accomplish the decoding task.</p>
 </p>
-A terminal interface also needs to be written.  The framework is already in place, but the commands need to be filled in. Something that can operate over
-the wired comm port at first, then move to the Bluetooth port. For the wired port, a maintainence approach is envisioned. Memory upload/download and some
-debug commands. For the Bluetooth port, real-time control will also be desired. This will allow something like my
-<a href="https://ke0ff.github.io/hm133/ic901rch.html">HM-133 dtmf interface</a> to control the radio with modern convieniences like direct frequency entry
-and other amenities.
+Terminal and bluetooth interfaces also need to be written.  The framework is already in place for a command line interface (populated with debug commands), but
+the radio commands need to be filled in. Something that can operate over the wired comm port at first, then move to the Bluetooth port. For the wired port, a
+maintainence approach is envisioned. Memory upload/download and some debug commands. For the Bluetooth port, real-time control will also be desired. This will
+allow something like my <a href="https://ke0ff.github.io/hm133/ic901rch.html">HM-133 dtmf interface</a> to control the radio with modern convieniences like direct
+frequency entry and other amenities.
 </p>
 More news as it develops...</p>
 
@@ -798,3 +940,4 @@ Here is a listing of the various project documents that are directly relevant to
 
 
 </body></html>
+© 2021 GitHub, Inc.
