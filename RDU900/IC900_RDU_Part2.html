@@ -222,7 +222,7 @@ to get the data separator to work correctly. Curious.</p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 After considering the issue, I realized that I had tested the data separator in parallel with the working IC-900 controller that I had borrowed.
 Thus, that controller loaded the signal in such a way that my design did not. This load turned out to be in the form of the
-Iq(dc) of the LM7806 voltage ragulator used on the ICOM design. For my design, I used a switching regulator circuit which has a
+Iq(dc) of the LM7806 voltage regulator used on the ICOM design. For my design, I used a switching regulator circuit which has a
 substantially lower Iq(dc). The "loaded" I(ac/dc) was in the form of a high-frequency pulse train used by the switching regulator. This
 conspired to remove the steady Iq(dc) of the original ICOM regulator circuit. A typical value of Iq(dc) for the LM78xx series is about 5 mA and a
 2.2K resistor accross the 11(ish) volts at the input to the data separator provided that load rather nicely.</p>
@@ -236,10 +236,10 @@ in the datasheet identifies a "zener diode" connected across this pin to GND.  T
 greater than 8V, but less than 10V. Delayed learning... Drat!</p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
-Lastly, I found that I needed to add a coin-cell battery to maintain the ARM's HIB RAM so that I could easily save the radio's state between power
+Lastly, I found that I needed to add a coin-cell battery to maintain the Tiva's HIB RAM so that I could easily save the radio's state between power
 cycles. When I originally started down this design path,
 I was very pleased with myself at planning to use on-chip EEPROM to maintain the radio channel memories. A vast improvement over older designs 
-(including the IC-900) as it elliminates the need for a battery and all the mainenance headaches that come with it over time. However,
+(including the IC-900) as it eliminates the need for a battery and all the maintenance headaches that come with it over time. However,
 I forgot about the fact that not only are there channel memories, but the overall state of the radio needs to be remembered during
 power-off. This includes many variables that are highly transient and would not typically be maintained in EEPROM because they
 can be changed often (such as settings for VFO, volume, squelch, etc...).</p>
@@ -260,7 +260,7 @@ be needed. The jury is still out on this one.</p>
 Up to a point, I had been focused on hardware and low-level software.  Once the hardware was no longer an issue (it is often NEVER, no longer an issue, I'm afraid),
 I had to switch gears and
 start thinking more about the user interface (UI). I had a template to work from in the form of the original controller operation.  However,
-I wasn't allowing that to limit what was possible.  But in the begining, I was mostly concerned just with the basics.  Things like, get the S-meter
+I wasn't allowing that to limit what was possible.  But in the beginning, I was mostly concerned just with the basics.  Things like, get the S-meter
 to work and display the frequency.  Then, get the radio part to work at the indicated frequency.  Receive first, then transmit, and on from there.
 The work I'd done on the low-level code paid off as I found almost no issues with the basic I/O between the UI and the radio. This allowed the
 focus to remain on the UI.  Rather quickly, I had a basic T/R radio.  Soon after, I could adjust the frequency and CTCSS tone.  Before I knew it,
@@ -281,7 +281,7 @@ where execution is triggered when a data value changes. To make a simple state m
 corresponding state diagram is sketched out. For each "event", a state name is assigned (these become numbers in the code, but we can assign
 names to the numbers to help the code make sense). The state variable feeds into a switch() statement which directs the program flow to the
 identified "event". The code at that event runs in sequence with only the briefest of delays (ideally) before exiting the switch() statement.
-If conditions warrent, the "event" will modify the state variable to point to another event on the state diagram. In this way, one event can
+If conditions warrant, the "event" will modify the state variable to point to another event on the state diagram. In this way, one event can
 direct flow to another event to accomplish the task at hand. Along the way, various resources, such as GPIO or timers, are also employed to
 regulate the flow and direction of the code.</p>
 </p>
@@ -297,7 +297,7 @@ There are a lot of RTOS options out there. You can even write your own (I once w
 write an RTOS into my bare-metal designs. However, in doing so I have to re-invent the wheel for each new project. Most of my new
 designs are generally evolutions of something I've done in the past, so I end up re-using code often enough that the coding efficiency is not
 poor enough to scrap all of my past work and jump onto the RTOS train. While it generally works for me, I'm not advocating it for all. I think it
-is important to excercise bare-metal skills when one is developing for real-time microcontrollers, but on the whole, using some kind of COTS
+is important to exercise bare-metal skills when one is developing for real-time microcontrollers, but on the whole, using some kind of COTS
 RTOS is going to be more efficient.  Still, if you are game, check out the <a href="https://github.com/ke0ff/RDU_IC900">CCS6
 project and source file github repo</a>.</p>
 </p>
@@ -319,7 +319,7 @@ number digit to get a fine resolution of volume/squelch changes.  By implication
 All in all, I'd end up spending most of my time managing the multiplex operations. With the myriad of features that I needed and wanted, this has
 become a bit of a challenge. Still, having been through this before, I at least knew what I was up against.  The resulting code is reasonable, tho not
 perfect. Considering it from an outsider's perspective, the code would likely be onerous to modify because there are lots of opportunities for
-something changed at point "A" to break something over at point "W".  It is my best effort, and I've generally done an OK job at traking down the breaks,
+something changed at point "A" to break something over at point "W".  It is my best effort, and I've generally done an OK job at tracking down the breaks,
 but it still could stand with some improvement.  Code comments are my only countermeasure at this point, so I am not likely to re-attempt the
 design unless some other influence intervenes.</p>
 </p>
@@ -332,9 +332,9 @@ the "appear" part in particular. All of the radio communications are handled in 
 inputs from the user and from the radio driving operations to the display and the radio.  Many paths cross which is part of why there are many options
 for breaking things. However, there are no real alternatives given the task at hand and the limits of the previously fixed LCD space.</p>
 </p>
-<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1027" type="#_x0000_t75" style='width:771;height:465'>
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1034" type="#_x0000_t75" style='width:771;height:465'>
  <v:imagedata src="IC900RDU_Clone_files/LCD_MAP.png" o:title="IMG_2695sm"/>
- </v:shape><![endif]--><![if !vml]><img border=0 width=771 height=465 src="IC900RDU_Clone_files/LCD_MAP.png" v:shapes="_x0000_i1027"><![endif]></p>
+ </v:shape><![endif]--><![if !vml]><img border=0 width=771 height=465 src="IC900RDU_Clone_files/LCD_MAP.png" v:shapes="_x0000_i1034"><![endif]></p>
 </p>
 <center>
 <p class=MsoNormal style='tab-stops:1.0in'>
@@ -343,7 +343,7 @@ Figure 1.  LCD "pixel" map with pixel names.
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 The pixel map of Figure 1 illustrates what there is to work with.  The LCD is depicted in the center, and the major areas are broken out around the
-periphery. Each break-out roughly corresponds to a "domain".  The frequency displays (M00 - M6 and S00 - S6) are the main "action" point where numberic
+periphery. Each break-out roughly corresponds to a "domain".  The frequency displays (M00 - M6 and S00 - S6) are the main "action" point where numeric
 or symbolic strings can be displayed. The bargraphs are the primary graphical display for amplitude data. The memory# digit (M7/S7) is primarily for
 just that - the memory number.  The "stock" and "new" indications are explained below:</p>
 </p>
@@ -440,7 +440,7 @@ and clears the mode when the timer expires.  Each coincident feature needs its o
 <p class=MsoNormal style='tab-stops:1.0in'>
 In addition to the mechanics of the sharing interfaces, there needs to be a signal to the operator as to what is going on. For example, one thing I didn't
 like about the IC-900 was how the squelch and volume adjustments were accomplished.  The SRF meter is deployed, but only if you hold down the corresponding
-button.  Also, there are only 7 segments in the bargraph, but 34 steps in each adjustment.  I wanted some acknowledgement of each change, so I decided to 
+button.  Also, there are only 7 segments in the bargraph, but 34 steps in each adjustment.  I wanted some acknowledgment of each change, so I decided to 
 use the memory number digit.  The numbers "0" - "4" would be a good choice, but then how would one distinguish these memory numbers from a volume or
 squelch adjustment?  I decided to implement a unique segment pattern for the lower "digit" of the adjustment, as shown in Figure 2.  None of the patterns
 shown are valid memory numbers so one can easily distinguish that there is an adjustment in progress (squelch is displayed in the main-band area, and volume
@@ -448,9 +448,9 @@ is displayed in the sub-band area).</p>
 </p>
 
 </p>
-<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1027" type="#_x0000_t75" style='width:298;height:120'>
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1028" type="#_x0000_t75" style='width:298;height:120'>
  <v:imagedata src="IC900RDU_Clone_files/vol_lsd.png" o:title="IMG_2695sm"/>
- </v:shape><![endif]--><![if !vml]><img border=0 width=298 height=120 src="IC900RDU_Clone_files/vol_lsd.png" v:shapes="_x0000_i1027"><![endif]></p>
+ </v:shape><![endif]--><![if !vml]><img border=0 width=298 height=120 src="IC900RDU_Clone_files/vol_lsd.png" v:shapes="_x0000_i1028"><![endif]></p>
 </p>
 <center>
 <p class=MsoNormal style='tab-stops:1.0in'>
@@ -466,14 +466,14 @@ Figure 2.  VOL/SQU adjust low-order symbol progression (the MEM# digit).
 <p class=MsoNormal style='tab-stops:1.0in'>
 Figure 3 illustrates the IC-900 control unit layout.  Of particular interest here are the keypress locations (buttons).  These are the primary user input media
 for the system. The list below describes the button uses.  Some of the button meanings have been usurped here to improve the operation of the radio.
-For example, on the IC-900, the band switch is accomplsihed by entering the SET mode, then moving to the BAND sub-menu, then selecting the band.  Compared
+For example, on the IC-900, the band switch is accomplished by entering the SET mode, then moving to the BAND sub-menu, then selecting the band.  Compared
 with the IC-901 (which has a dedicated BAND button), this is a lot of effort in order to switch bands.  Since there is an MR and a VFO button, I decided
 to use MR to toggle between VFO and memory modes, and use the VFO button as the "BAND" button.</p>
 </p>
 
-<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1027" type="#_x0000_t75" style='width:994;height:348'>
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1029" type="#_x0000_t75" style='width:994;height:348'>
  <v:imagedata src="IC900RDU_Clone_files/IC-900_RCU.png" o:title="IMG_2695sm"/>
- </v:shape><![endif]--><![if !vml]><img border=0 width=994 height=348 src="IC900RDU_Clone_files/IC-900_RCU.png" v:shapes="_x0000_i1027"><![endif]></p>
+ </v:shape><![endif]--><![if !vml]><img border=0 width=994 height=348 src="IC900RDU_Clone_files/IC-900_RCU.png" v:shapes="_x0000_i1029"><![endif]></p>
 <center>
 <p class=MsoNormal style='tab-stops:1.0in'>
 Figure 3.  IC-900 Control Unit.
@@ -537,7 +537,7 @@ Figure 3.  IC-900 Control Unit.
 <td style="vertical-align:top">CALL:</td>
 <td style="vertical-align:top"><b>m/s</b></td>
 <td> </td>
-<td style="vertical-align:top">A special memory mode with 4 possible memory selections (the DIAL ir UP/DN buttons select which call channel is active) </td>
+<td style="vertical-align:top">A special memory mode with 4 possible memory selections (the DIAL or UP/DN buttons select which call channel is active) </td>
 </tr>
 
 <tr>
@@ -764,15 +764,15 @@ can be "OR'ed" with new changes which still "remembers" old changes.</p>
 Overall, the operation of the controller is similar to that of the ICOM version. However, there are a couple of innovations that are worthy of note.
 The first is rather ho-hum, but useful to a degree. I re-implemented (and modified) my 7-segment alphanumeric character set (first developed for my
 <a href="https://ke0ff.github.io/GPSDWC.pdf">GPS Wall Clock</a>  -- and no, I'm not the first to attempt this) to allow for more informative error
-messages as well as for text memory names. There are only 6 characters available in the frequency display space but this will accomodate any known call-sign,
+messages as well as for text memory names. There are only 6 characters available in the frequency display space but this will accommodate any known call-sign,
 and implementing a sliding message display will allow a wider display message. In addition, there are a few characters that are non-ideal, but are the best
 one can manage with only 7 segments. The image below illustrates the character map for the numbers and letters. Preference is given to lower case characters.
 Knowing this helps resolve a couple of conflicts for "u" (u) and "U" (V). The other characters of questionable merit are "K", "m", "w" and "x".
 See what you think:</p>
 </p>
-<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1027" type="#_x0000_t75" style='width:813;height:145'>
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1030" type="#_x0000_t75" style='width:813;height:145'>
  <v:imagedata src="IC900RDU_Clone_files/alphanum_7seg.png" o:title="IMG_2695sm"/>
- </v:shape><![endif]--><![if !vml]><img border=0 width=813 height=145 src="IC900RDU_Clone_files/alphanum_7seg.png" v:shapes="_x0000_i1027"><![endif]></p>
+ </v:shape><![endif]--><![if !vml]><img border=0 width=813 height=145 src="IC900RDU_Clone_files/alphanum_7seg.png" v:shapes="_x0000_i1030"><![endif]></p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 <center>
@@ -781,9 +781,9 @@ Figure 4.  7-segment alpha-numeric character map ("font").
 </center>
 </p>
 </p>
-<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1027" type="#_x0000_t75" style='width:200;height:70'>
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1031" type="#_x0000_t75" style='width:200;height:70'>
  <v:imagedata src="IC900RDU_Clone_files/ke0ff_7seg.png" o:title="IMG_2695sm"/>
- </v:shape><![endif]--><![if !vml]><img border=0 width=200 height=70 src="IC900RDU_Clone_files/ke0ff_7seg.png" v:shapes="_x0000_i1027"><![endif]></p>
+ </v:shape><![endif]--><![if !vml]><img border=0 width=200 height=70 src="IC900RDU_Clone_files/ke0ff_7seg.png" v:shapes="_x0000_i1031"><![endif]></p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 <center>
@@ -794,7 +794,7 @@ Figure 5.  "KE0FF" in 7-segment font.
 </p>
 
 <p class=MsoNormal style='tab-stops:1.0in'>
-All of the characters are unique, if cryptic, which elliminates problems of context. It turns out that call signs have a limited set of syntax rules
+All of the characters are unique, if cryptic, which eliminates problems of context. It turns out that call signs have a limited set of syntax rules
 which end up causing problems if one tries to use any of the numerals as stand-ins for an alpha character (e.g., using "6" for upper case "G"). "W6GY"
 thus becomes "W66Y" in the display - which leads to the question: how does one differentiate "W6GY" from "WG6Y" in such a situation? Hence the importance
 of uniqueness.</p>
@@ -812,9 +812,9 @@ The second innovation is what I'm calling "thumbwheel mode", alluded to previous
 All of the tuning is accomplished using either a single dial, or the microphone up/down buttons.  A MHz mode and frequency step (TS) option are offered which
 helps somewhat, but you can still be stuck tuning through numerous dial clicks with purposeful forethought to get to the desired frequency as quickly as possible.
 While a direct entry method is planned using the bluetooth interface, I needed something in the meantime to cover the gap. The thumbwheel mode fills this gap
-and is really just a variation on the original MHz mode. In thumbwheel mode, the system starts at the highest moveable digit for a given band (e.g., 100 MHz for
+and is really just a variation on the original MHz mode. In thumbwheel mode, the system starts at the highest movable digit for a given band (e.g., 100 MHz for
 the 1200 MHz module, or 1 MHz for the 10m module).  The dial adjusts that digit (which flashes to identify it) and the MHz button steps to the next digit to the
-right (or back to the left-most moveable digit if all the way to the right). You can move anywhere in the band in about 5 seconds without trying all that hard.
+right (or back to the left-most movable digit if all the way to the right). You can move anywhere in the band in about 5 seconds without trying all that hard.
 WAY better than the original controller.  A small reward for being in control of the software.</p>
 </p>
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
@@ -825,7 +825,7 @@ WAY better than the original controller.  A small reward for being in control of
 Unfortunately, the whole on-chip memory situation has been constantly eroding. After working the numbers and trying to eek out as much compression as I
 could muster, I just couldn't get as many memories stored as I would have liked.  This, coupled with the NVRAM issue (requiring a battery to save the radio state)
 pushed me further and
-further away from on-chip memory until it became clear that I needed another answer: an external, non-volitile memory with at least 8K bytes
+further away from on-chip memory until it became clear that I needed another answer: an external, non-volatile memory with at least 8K bytes
 of storage.</p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
@@ -845,15 +845,15 @@ throughout the LCD display code.</p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 A further complication is that I would not be able to use the built-in SPI (SSI in TI/ARM-speak) but rather would have to use a bit-bang approach.
 This is due to the available I/O for MISO.  None of the available peripheral pins for MISO were easily shareable, so the effects of forcing this issue would also ripple
-throughout the design.  To mitigate these issues, I settled on a couple of comprimises: 1) use an interrupt timer to create a more consistent
-bit-rate system (increases peak bit-rate).  2) modify the NVRAM mirror transfers to limit themselves to only the bandid that is being modified.
+throughout the design.  To mitigate these issues, I settled on a couple of compromises: 1) use an interrupt timer to create a more consistent
+bit-rate system (increases peak bit-rate).  2) modify the NVRAM mirror transfers to limit themselves to only the band-ID that is being modified.
 This 2nd approach would yield the greatest results since it would reduce the amount of data transferred up to 8-fold for any given change event.</p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 The other mitigation was to use a "shadow" NVRAM device with an "auto-store" feature.  These devices have been around for a while, but have not
 made it into the mainstream of popular design culture.  They are unique and offer some significant advantages.  Firstly, they are an SRAM core
 that features "infinite" write capability with effectively no write-delay (EEPROM can require up to 10ms per write-cycle). Second, there is a "shadow"
-memory of EEPROM cells that can copy the entired SRAM array in a single
+memory of EEPROM cells that can copy the entire SRAM array in a single
 write cycle.  Memory can be moved to/from the EEPROM array at will and on power-up.  The auto-store versions will automatically copy the SRAM
 data to the EEPROM array when power is removed (a dedicated, large-value capacitor is required - typically about 100uF).</p>
 </p>
@@ -863,26 +863,26 @@ for the pair.  However, given that this cost is less than the cost of UPS ground
 concern is that the solution directly confronts the issues at hand and offers solutions that can be implemented with minimal effort and maximum
 results.  Photo 1 shows the memory chip installed next to the MCU.</p>
 </p>
-<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1027" type="#_x0000_t75" style='width:606;height:486'>
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1032" type="#_x0000_t75" style='width:606;height:486'>
  <v:imagedata src="IC900RDU_Clone_files/nvram.jpg" o:title="nvram.jpg"/>
- </v:shape><![endif]--><![if !vml]><img border=0 width=606 height=486 src="IC900RDU_Clone_files/nvram.jpg" v:shapes="_x0000_i1027"><![endif]></p>
+ </v:shape><![endif]--><![if !vml]><img border=0 width=606 height=486 src="IC900RDU_Clone_files/nvram.jpg" v:shapes="_x0000_i1032"><![endif]></p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 <center>
 <p class=MsoNormal style='tab-stops:1.0in'>
-Photo 1.  NVRAM S.C.A.B. (Supplimental Circuit Addition Board) installed next to the controller MCU.
+Photo 1.  NVRAM S.C.A.B. (Supplemental Circuit Addition Board) installed next to the controller MCU.
 </center>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 One consequence of this choice of device is that it is rather large, in terms of bytes that is, 128K bytes to be exact.  As of this writing, the entirety
-of NVRAM requirements for the controller is around 6000 bytes.  If we limit ourselves to only use 64K bytes of theNVRAM, we can squeeze up to 10 copies of this
+of NVRAM requirements for the controller is around 6000 bytes.  If we limit ourselves to only use half of the NVRAM, we can squeeze up to 10 copies of this
 data into this one device (more than <b>I</b> can think to need).  This allows one to maintain several different "radios" with completely different configurations
 (most notably, stored memories).  A user key sequence would allow the radios to be selected on demand.  This would allow for several memory "banks" that could be
 used on a long cross-country journey, for example.</p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 Interestingly, this is just how the memory world is these days.  8K or 32K byte memories are almost a thing of the
-past with few new devices in these size categoies being manufactured. So, one is not rewarded in any significant way by trying to select "just the
+past with few new devices in these size categories being manufactured. So, one is not rewarded in any significant way by trying to select "just the
 right size" memory device.  It is generally just as cheap and easy to go with something that has 8 or 10 times as much memory as you'll really need.
 </p>
 
@@ -923,9 +923,9 @@ this isn't really an issue here.</p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 I'm a big fan of the space program, and Apollo in particular.  The history of the Apollo flight computer is quite fascinating and the "1202 alarm" events of Apollo 11
-are a testiment to what happens with a good design in a bad situation. Here, I'm not so sure about the good design part, but while testing the memory scan feature, I did
+are a testament to what happens with a good design in a bad situation. Here, I'm not so sure about the good design part, but while testing the memory scan feature, I did
 run into a "fail-gracefully" event that got my attention.  I was actually chasing a finicky PTT problem: if you did a very quick "press-release" of the PTT, the TX might
-stay stuck on.  Not every time, but certainly WAY more often than was acceptible.  I found that the SIN code was returning a "0" result on occasion.  This wasn't directly
+stay stuck on.  Not every time, but certainly WAY more often than was acceptable.  I found that the SIN code was returning a "0" result on occasion.  This wasn't directly
 relevant to the PTT issue, but that is how I discovered the zero value.  Which, by the way, is not supposed to be a possible value - there should always be several stop
 bits (1's) even if the data payload is zero.  I finally realized that there was a way: if the SIN buffer over-runs, the function that fetches the data will return a zero.
 The SIN buffer is a wrap-around type that uses a "head" and "tail" pointers to put data into and remove data from the buffer.  If head == tail, then the buffer is empty
@@ -943,14 +943,14 @@ Still, at 4800 baud and 33 bits, this is almost 7ms between frames. Interestingl
 I tried throwing out some of the stop bits which has the effect of shortening the data words (by up to a couple of ms) which thus delivers the data word to the buffer
 faster.  However, the latency in the loop was greater than a couple of ms, so this wasn't sufficient to address the problem.  Without any other real options, I next
 tried speeding up the SPI data clock which helped quite a bit. With a 3x increase in the data clock, the overrun frequency was reduced from a regular rate (about 5
-to 10 times per second) to a very rare occurance. Upon reflection, this makes sense.  Since the SPI is bit-bang, the process loop is tied up sending the SPI data until a
+to 10 times per second) to a very rare occurrence. Upon reflection, this makes sense.  Since the SPI is bit-bang, the process loop is tied up sending the SPI data until a
 message is complete. This adds a "sneak" delay (A.K.A., a "burr") into the process loop that eventually ate up all of the available cycles in between SIN data words.</p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 Speeding the clock is a useful countermeasure, but it is not a complete fix.  If we assume that the process loop takes just a tiny bit more than the 7 ms between status
 words, and that the majority of the delay in the process loop is tied up in the SPI transfers, the best we can expect is a margin of about 4ms. It is likely still possible
-to cobble together a series of SPI transfers that could cause the overrun issue to recurr.  While the system will "limp along" in overrun conditions, the lost data
-still causes noticable negative results to the operator. Thus, a more robust solution is needed. Of course, I've touched on a possible solution previously regarding the
+to cobble together a series of SPI transfers that could cause the overrun issue to recur.  While the system will "limp along" in overrun conditions, the lost data
+still causes noticeable negative results to the operator. Thus, a more robust solution is needed. Of course, I've touched on a possible solution previously regarding the
 NVRAM interface: an interrupt driven, queued SPI interface.  This would allow the software to fill the SPI buffer, and start the transaction, then move on to the next
 step in the process loop. However, as also previously touched upon, this scheme is greatly complicated by the fact that there are two different SPI peripherals to service.
 The greatest complication is that the NVRAM code, as currently written, can access the NVRAM for an essentially unlimited number of bytes which makes allocating RAM for the
@@ -981,7 +981,7 @@ I had located and procured a couple of the LCD chips just in case.</p>
 When I decided to re-engineer the controller, I figured I'd end up solving the problem and didn't give it much more thought. Until I got the radio hardware and
 software to the point that it was displaying frequencies in the main and sub bands. Even then, it took a bit of time as the "wonky" segments don't express themselves
 for just any pattern. 443.675 MHz, a local favorite of mine, set on the sub-band is one of the patterns.  Once I was experimenting with the radio in the early stages
-of software development, I noticed, with no shortage of horror, the re-surgence of the wonky segments.  Basically what happens is that the "f" segment of the 1 MHz digit
+of software development, I noticed, with no shortage of horror, the resurgence of the wonky segments.  Basically what happens is that the "f" segment of the 1 MHz digit
 will activate, and the "e" segment will flash. For the aforementioned repeater, the result on the display is "449.675". Since the "e" segment is off for this frequency,
 it doesn't flash, but you can enter "146.640" and get the flashing of the "e" segment. The fact that I was seeing the exact same behavior with completely different hardware
 and software was a pretty substantial indictment of the LCD interface chip(s).</p>
@@ -1019,21 +1019,20 @@ code would have to interface with the new option board and also interact with it
 <p class=MsoNormal style='tab-stops:1.0in'>
 Terminal and bluetooth interfaces also need to be designed and coded.  The framework is already in place for a command line interface (populated with debug commands), but
 the radio commands need to be filled in. Something that can operate over the wired comm port at first, then move to the Bluetooth port. For the wired port, a
-maintainence approach is envisioned. Memory upload/download and some debug commands. For the Bluetooth port, real-time control will also be desired. This will
-allow something like my <a href="https://ke0ff.github.io/hm133/ic901rch.html">HM-133 DTMF interface for the IC-901</a> to control the radio with modern convieniences
+maintenance approach is envisioned. Memory upload/download and some debug commands. For the Bluetooth port, real-time control will also be desired. This will
+allow something like my <a href="https://ke0ff.github.io/hm133/ic901rch.html">HM-133 DTMF interface for the IC-901</a> to control the radio with modern conveniences
 like direct frequency entry and other amenities.</p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
 One possibility is to implement my KeyPad Unit (KPU, see Photo 2) for my mobile installation.  This device, while ungainly looking, is a multi-faceted input terminal with
 a main dial, smaller knobs that can be used for squelch and volume, along with several buttons that can be used for direct frequency entry.  The unit also interfaces with
-the HM-151/133 microphones allowing the function buttons present on these microphones to be interepted by the new IC-900 controller.  The KPU would be located at the
+the HM-151/133 microphones allowing the function buttons present on these microphones to be interpreted by the new IC-900 controller.  The KPU would be located at the
 center console within easy reach of the driver.  The radio control unit would be located up under the rear-view mirror (my preference) using a cell-phone window-mount rig.
 </p>
 </p>
-<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1035" type="#_x0000_t75" style='width:610;height:492'>
+<p class=MsoNormal align=center style='text-align:center;tab-stops:1.0in'><!--[if gte vml 1]><v:shape id="_x0000_i1033" type="#_x0000_t75" style='width:606;height:486'>
  <v:imagedata src="IC900RDU_Clone_files/KPU_sm.jpg" o:title="KPU_sm.jpg"/>
- </v:shape><![endif]--><![if !vml]><img border=0 width=610 height=492 src="IC900RDU_Clone_files/KPU_sm.jpg" v:shapes="_x0000_i1035"><![endif]></p>
-
+ </v:shape><![endif]--><![if !vml]><img border=0 width=606 height=486 src="IC900RDU_Clone_files/KPU_sm.jpg" v:shapes="_x0000_i1033"><![endif]></p>
 <center>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
