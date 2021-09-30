@@ -232,7 +232,7 @@ Speaking of the switching regulator, I ended up replacing a couple of those part
 regulators I've encountered allow the enable to be tied to Vin to force the part to be on all the time. With the part I used in this
 design, there is a 6V max limit on the voltage applied to the enable pin. An easy fix, but I had used this part before by connecting the
 enable directly to Vin and hadn't experienced this issue. Apparently, 8 or so volts doesn't have the same effect as 10 or so volts.  The fine-print
-in the datasheet identifies a "zerner diode" connected across this pin to GND.  The Vz ("knee" voltage) wasn't clearly stated, but it must be
+in the datasheet identifies a "zener diode" connected across this pin to GND.  The Vz ("knee" voltage) wasn't clearly stated, but it must be
 greater than 8V, but less than 10V. Delayed learning... Drat!</p>
 </p>
 <p class=MsoNormal style='tab-stops:1.0in'>
